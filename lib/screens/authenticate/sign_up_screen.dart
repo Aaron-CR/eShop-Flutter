@@ -7,23 +7,25 @@ import 'package:eshop/widgets/rounded_button.dart';
 import 'package:eshop/widgets/social_buttons_row.dart';
 import 'package:eshop/utils/spinner.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
-  SignUpScreen({Key key}) : super(key: key);
-
+  SignUpScreen({Key key, this.user}) : super(key: key);
+  final AuthService user;
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState(user);
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final AuthService user;
   bool isLoading = false;
-
   String displayName = '';
   String email = '';
   String password = '';
   String error = '';
+
+  _SignUpScreenState(this.user);
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       child: isLoading
           ? Spinner()
           : Scaffold(
+              key: _scaffoldKey,
               body: Stack(
                 children: <Widget>[
                   Container(
@@ -61,7 +64,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             key: _formKey,
                             child: Column(
                               children: <Widget>[
-                                Input(
+                                CustomTextFormField(
                                   validator: (value) =>
                                       value.isEmpty ? 'Enter an name' : null,
                                   hintText: 'Enter your name',
@@ -73,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   },
                                 ),
                                 SizedBox(height: 20.0),
-                                Input(
+                                CustomTextFormField(
                                   validator: (value) => !isEmail(value)
                                       ? 'Enter a valid email address'
                                       : null,
@@ -87,7 +90,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   },
                                 ),
                                 SizedBox(height: 20.0),
-                                Input(
+                                CustomTextFormField(
                                   validator: (value) => value.length < 6
                                       ? 'Password must be at least 6 digits long'
                                       : null,
@@ -129,7 +132,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                SocialButtonsRow(),
+                                SocialButtonsRow(
+                                    scaffoldKey: _scaffoldKey, user: user),
                                 signInButton(),
                                 SizedBox(height: 12.0),
                                 Text(

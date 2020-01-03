@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eshop/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
@@ -24,7 +26,7 @@ class AuthService with ChangeNotifier {
   Status get status => _status;
   FirebaseUser get user => _user;
 
-  User _userFromFirebaseUser(FirebaseUser user) {
+  User userFromFirebaseUser(FirebaseUser user) {
     return user != null
         ? User(
             uid: user.uid,
@@ -37,27 +39,32 @@ class AuthService with ChangeNotifier {
   /// Sign Up
   // Sign Up with email & password
   Future signUpUser(String email, String password, String displayName) async {
+    String photoUrl =
+        'https://eshop-bbd48.firebaseapp.com/assets/images/user/user-thumb.jpg';
     try {
+      _status = Status.Authenticating;
+      notifyListeners();
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
-      var userUpdateInfo = UserUpdateInfo();
+      UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
       userUpdateInfo.displayName = displayName;
-      userUpdateInfo.photoUrl = 'https://eshop-bbd48.firebaseapp.com/assets/images/user/user-thumb.jpg';
-      user.updateProfile(userUpdateInfo);
-      user.reload();
-
-      Firestore.instance.collection('users').document().setData({
-        'uid': user.uid,
-        'email': user.email,
-        'displayName': user.displayName,
-        'photoUrl': user.photoUrl,
-        'roles': {'editor': true}
+      userUpdateInfo.photoUrl = photoUrl;
+      user.updateProfile(userUpdateInfo).then((onValue) {
+        Firestore.instance.collection('users').document().setData({
+          'uid': user.uid,
+          'email': user.email,
+          'displayName': displayName,
+          'photoUrl': photoUrl,
+          'roles': {'editor': true}
+        });
       });
-      return _userFromFirebaseUser(user);
+      return true;
     } catch (e) {
+      _status = Status.Unauthenticated;
+      notifyListeners();
       print(e.message);
-      return null;
+      return false;
     }
   }
 
