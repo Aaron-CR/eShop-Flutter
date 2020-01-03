@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/shared/constants.dart';
 import 'package:eshop/utils/background.dart';

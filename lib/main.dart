@@ -1,14 +1,15 @@
-import 'package:eshop/utils/theme-data.dart';
-import 'package:eshop/wrapper.dart';
-import 'package:eshop/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-
-import 'models/user.dart';
 import 'package:eshop/router.dart';
+import 'package:eshop/wrapper.dart';
+import 'package:eshop/utils/theme-data.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
+}
 
 class MyApp extends StatelessWidget {
   @override

@@ -1,11 +1,10 @@
-import 'package:eshop/screens/authenticate/authenticate.dart';
-import 'package:eshop/screens/authenticate/sign_in_screen.dart';
-import 'package:eshop/screens/home.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/shared/constants.dart';
 import 'package:eshop/utils/spinner.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:eshop/screens/home.dart';
+import 'package:eshop/screens/authenticate.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({Key key}) : super(key: key);

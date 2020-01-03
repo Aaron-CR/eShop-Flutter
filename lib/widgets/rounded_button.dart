@@ -1,5 +1,5 @@
-import 'package:eshop/shared/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:eshop/shared/constants.dart';
 
 class RoundedButton extends StatelessWidget {
   const RoundedButton({Key key, @required this.onPressed, @required this.text})
