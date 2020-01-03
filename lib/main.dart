@@ -4,12 +4,7 @@ import 'package:eshop/router.dart';
 import 'package:eshop/wrapper.dart';
 import 'package:eshop/utils/theme-data.dart';
 
-void main() {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(MyApp());
-  });
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
@@ -18,6 +13,10 @@ class MyApp extends StatelessWidget {
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,
     ));
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     return MaterialApp(
       theme: themeData(),
