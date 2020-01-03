@@ -1,6 +1,7 @@
 /// This file contains all the routing constants used within the app
 
 const String homeRoute = '/';
+const String authenticateRoute = '/authenticate';
 const String signInRoute = '/signin';
 const String signUpRoute = '/signup';
 const String dealsRoute = '/deals';

@@ -1,8 +1,7 @@
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/shared/constants.dart';
-import 'package:eshop/utils/background_image.dart';
+import 'package:eshop/utils/background.dart';
 import 'package:eshop/utils/email_validator.dart';
-import 'package:eshop/widgets/circular_button.dart';
 import 'package:eshop/widgets/input.dart';
 import 'package:eshop/widgets/rounded_button.dart';
 import 'package:eshop/widgets/social_buttons_row.dart';
@@ -28,11 +27,7 @@ class _SignInScreenState extends State<SignInScreen> {
       key: _scaffoldKey,
       body: Stack(
         children: <Widget>[
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: backgroundImage(),
-          ),
+          Background(),
           Container(
             height: double.infinity,
             child: SingleChildScrollView(
@@ -87,11 +82,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           text: 'Login',
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
-                              if (!await user.signInUser(_email, _password))
-                                _scaffoldKey.currentState.showSnackBar(SnackBar(
-                                  content: Text(
-                                      "Your email and password combination does not match a eShop account. Please try again."),
-                                ));
+                              if (!await user.signInUser(_email, _password)) {
+                                _scaffoldKey.currentState.showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        "Your email and password combination does not match a eShop account. Please try again."),
+                                  ),
+                                );
+                              }
                             }
                           },
                         ),

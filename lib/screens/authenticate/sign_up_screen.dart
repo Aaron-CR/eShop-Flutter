@@ -1,6 +1,6 @@
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/shared/constants.dart';
-import 'package:eshop/utils/background_image.dart';
+import 'package:eshop/utils/background.dart';
 import 'package:eshop/utils/email_validator.dart';
 import 'package:eshop/widgets/input.dart';
 import 'package:eshop/widgets/rounded_button.dart';
@@ -36,11 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               key: _scaffoldKey,
               body: Stack(
                 children: <Widget>[
-                  Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    decoration: backgroundImage(),
-                  ),
+                  Background(),
                   Container(
                     height: double.infinity,
                     child: SingleChildScrollView(

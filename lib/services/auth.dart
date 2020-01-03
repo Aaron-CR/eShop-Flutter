@@ -38,7 +38,8 @@ class AuthService with ChangeNotifier {
 
   /// Sign Up
   // Sign Up with email & password
-  Future signUpUser(String email, String password, String displayName) async {
+  Future<bool> signUpUser(
+      String email, String password, String displayName) async {
     String photoUrl =
         'https://eshop-bbd48.firebaseapp.com/assets/images/user/user-thumb.jpg';
     try {

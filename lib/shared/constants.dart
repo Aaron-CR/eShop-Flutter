@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 final kMainColor = Color(0xFFE84444);
 
+final kWhiteTextStyle = TextStyle(
+  color: Colors.white,
+);
+
 final kHintTextStyle = TextStyle(
   color: Colors.black54,
   fontFamily: 'OpenSans',

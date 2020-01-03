@@ -1,3 +1,4 @@
+import 'package:eshop/screens/authenticate/authenticate.dart';
 import 'package:eshop/screens/authenticate/sign_in_screen.dart';
 import 'package:eshop/screens/home.dart';
 import 'package:eshop/services/auth.dart';
@@ -19,7 +20,7 @@ class Wrapper extends StatelessWidget {
             case Status.Uninitialized:
               return Splash();
             case Status.Unauthenticated:
-              return SignInScreen();
+              return AuthenticateScreen();
             case Status.Authenticating:
               return Spinner();
             case Status.Authenticated:
