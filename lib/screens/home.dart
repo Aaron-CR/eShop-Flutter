@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:eshop/models/product.dart';
 import 'package:eshop/services/auth.dart';
+import 'package:eshop/services/crud.dart';
 import 'package:eshop/shared/constants_routes.dart';
 import 'package:eshop/utils/spinner.dart';
+import 'package:eshop/widgets/product_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key key}) : super(key: key);
+  List<Product> products;
+
   @override
   Widget build(BuildContext context) {
+    final productProvider = Provider.of<Crud>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('eShop'),
@@ -20,10 +26,23 @@ class Home extends StatelessWidget {
           return user.hasData ? buildDrawer(context, user) : Spinner();
         },
       ),
-      body: Center(
-        child: Container(
-          child: Text('Home'),
-        ),
+      body: Container(
+        child: StreamBuilder(
+            stream: productProvider.fetchProductsAsStream(),
+            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasData) {
+                products = snapshot.data.documents
+                    .map((doc) => Product.fromMap(doc.data, doc.documentID))
+                    .toList();
+                return ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (buildContext, index) =>
+                      ProductCard(productDetails: products[index]),
+                );
+              } else {
+                return Text('fetching');
+              }
+            }),
       ),
     );
   }
