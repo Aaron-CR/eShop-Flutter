@@ -46,11 +46,8 @@ class _ModifyProductState extends State<ModifyProduct> {
                     fillColor: Colors.grey[300],
                     filled: true,
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter Product Title';
-                    }
-                  },
+                  validator: (value) =>
+                      value.isEmpty ? 'Please enter Product Title' : null,
                   onSaved: (value) => title = value),
               SizedBox(
                 height: 16,
@@ -64,11 +61,8 @@ class _ModifyProductState extends State<ModifyProduct> {
                     fillColor: Colors.grey[300],
                     filled: true,
                   ),
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Please enter The price';
-                    }
-                  },
+                  validator: (value) =>
+                      value.isEmpty ? 'Please enter The price' : null,
                   onSaved: (value) => price = value),
               DropdownButton<String>(
                 value: productType,

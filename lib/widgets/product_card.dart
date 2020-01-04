@@ -1,5 +1,5 @@
 import 'package:eshop/models/product.dart';
-import 'package:eshop/screens/product/product_details.dart';
+import 'package:eshop/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -14,7 +14,7 @@ class ProductCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => ProductDetails(product: productDetails),
+            builder: (_) => ProductDetailsScreen(product: productDetails),
           ),
         );
       },

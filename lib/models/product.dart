@@ -1,4 +1,4 @@
-/* class Product {
+class Product {
   String amazonURL;
   String brand;
   String deal;
@@ -11,21 +11,10 @@
   String stock;
   String userId;
 
-  Product(
-      {this.amazonURL,
-      this.brand,
-      this.deal,
-      this.description,
-      this.features,
-      this.id,
-      this.photoURL,
-      this.price,
-      this.productName,
-      this.stock,
-      this.userId});
+  Product({this.id, this.price, this.productName, this.photoURL});
 
   Product.fromMap(Map snapshot, String id)
-      : id = id,
+      : id = id ?? '',
         amazonURL = snapshot['amazonURL'] ?? '',
         brand = snapshot['brand'] ?? '',
         deal = snapshot['deal'] ?? '',
@@ -36,6 +25,7 @@
         productName = snapshot['productName'] ?? '',
         stock = snapshot['stock'] ?? '',
         userId = snapshot['userId'] ?? '';
+
   toJson() {
     return {
       "id": id,
@@ -49,30 +39,6 @@
       "productName": productName,
       "stock": stock,
       "userId": userId,
-    };
-  }
-}
- */
-
-class Product {
-  String id;
-  String price;
-  String productName;
-  String photoURL;
-
-  Product({this.id, this.price, this.productName, this.photoURL});
-
-  Product.fromMap(Map snapshot, String id)
-      : id = id ?? '',
-        price = snapshot['price'] ?? '',
-        productName = snapshot['productName'] ?? '',
-        photoURL = snapshot['photoURL'] ?? '';
-
-  toJson() {
-    return {
-      "price": price,
-      "productName": productName,
-      "photoURL": photoURL,
     };
   }
 }

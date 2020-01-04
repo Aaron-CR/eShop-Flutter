@@ -1,15 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eshop/models/product.dart';
+import 'package:eshop/router.dart';
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/services/crud.dart';
-import 'package:eshop/shared/constants_routes.dart';
-import 'package:eshop/utils/spinner.dart';
+import 'package:eshop/widgets/spinner.dart';
 import 'package:eshop/widgets/product_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Home extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List<Product> products;
 
   @override
@@ -25,6 +30,12 @@ class Home extends StatelessWidget {
         builder: (BuildContext context, AsyncSnapshot user) {
           return user.hasData ? buildDrawer(context, user) : Spinner();
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/addProduct');
+        },
+        child: Icon(Icons.add),
       ),
       body: Container(
         child: StreamBuilder(

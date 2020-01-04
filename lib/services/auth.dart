@@ -20,6 +20,7 @@ class AuthService with ChangeNotifier {
   }
 
   Status get status => _status;
+
   FirebaseUser get user => _user;
 
   User userFromFirebaseUser(FirebaseUser user) {
@@ -47,6 +48,7 @@ class AuthService with ChangeNotifier {
       UserUpdateInfo userUpdateInfo = new UserUpdateInfo();
       userUpdateInfo.displayName = displayName;
       userUpdateInfo.photoUrl = photoUrl;
+      user.reload();
       user.updateProfile(userUpdateInfo).then((onValue) {
         Firestore.instance.collection('users').document().setData({
           'uid': user.uid,
@@ -56,6 +58,7 @@ class AuthService with ChangeNotifier {
           'roles': {'editor': true}
         });
       });
+      user.reload();
       return true;
     } catch (e) {
       _status = Status.Unauthenticated;

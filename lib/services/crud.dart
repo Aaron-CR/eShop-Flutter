@@ -37,8 +37,7 @@ class Crud extends ChangeNotifier {
   }
 
   Future addProduct(Product data) async {
-    var result = await _api.addDocument(data.toJson());
-
+    await _api.addDocument(data.toJson());
     return;
   }
 }
