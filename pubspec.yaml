@@ -14,7 +14,7 @@ description: A eShop project.
 version: 1.0.1+2
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
@@ -23,17 +23,35 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  provider: ^4.0.1
-  rxdart: ^0.23.1
-  flutter_spinkit: ^4.1.1+1
-  firebase_core: ^0.4.3+1
-  firebase_auth: ^0.15.3
-  firebase_storage: ^3.1.0
-  cloud_firestore: ^0.13.0+1
-  google_sign_in: ^4.1.1
+  # http request
+  http: ^0.12.0+4
+  # async package to add additional Cancellable operations
+  async: ^2.4.0
+  # get it
   get_it: ^3.1.0
+  # provider
+  provider: ^4.0.1
+  # provider architecture
+  provider_architecture: ^1.0.5
+  # 
+  rxdart: ^0.23.1
+  # 
+  flutter_spinkit: ^4.1.1+1
+  # 
+  firebase_core: ^0.4.3+1
+  # 
+  firebase_auth: ^0.15.3
+  # 
+  firebase_storage: ^3.1.0
+  # 
+  cloud_firestore: ^0.13.0+1
+  # 
+  google_sign_in: ^4.1.1
+  #
   url_launcher: ^5.4.1
+  #
   flutter_staggered_grid_view: ^0.3.0
+  # REMOVE LATTER
   english_words: ^3.1.5
 
 dev_dependencies:

@@ -1,10 +1,14 @@
-import 'package:eshop/services/api.dart';
-import 'package:eshop/services/crud.dart';
+import 'package:eshop/services/authentication_service.dart';
+import 'package:eshop/services/firestore_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:eshop/services/navigation_service.dart';
+import 'package:eshop/services/dialog_service.dart';
 
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
-  locator.registerLazySingleton(() => Api('products'));
-  locator.registerLazySingleton(() => Crud());
+  locator.registerLazySingleton(() => NavigationService());
+  locator.registerLazySingleton(() => DialogService());
+  locator.registerLazySingleton(() => AuthenticationService());
+  locator.registerLazySingleton(() => FirestoreService());
 }
