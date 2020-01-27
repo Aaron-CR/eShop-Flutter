@@ -4,33 +4,33 @@ import 'dart:async';
 class Api {
   final Firestore _db = Firestore.instance;
   final String path;
-  CollectionReference ref;
+  CollectionReference reference;
 
   Api(this.path) {
-    ref = _db.collection(path);
+    reference = _db.collection(path);
   }
 
   Future<QuerySnapshot> getDataCollection() {
-    return ref.getDocuments();
+    return reference.getDocuments();
   }
 
   Stream<QuerySnapshot> streamDataCollection() {
-    return ref.snapshots();
+    return reference.snapshots();
   }
 
   Future<DocumentSnapshot> getDocumentById(String id) {
-    return ref.document(id).get();
+    return reference.document(id).get();
   }
 
   Future<void> removeDocument(String id) {
-    return ref.document(id).delete();
+    return reference.document(id).delete();
   }
 
   Future<DocumentReference> addDocument(Map data) {
-    return ref.add(data);
+    return reference.add(data);
   }
 
   Future<void> updateDocument(Map data, String id) {
-    return ref.document(id).updateData(data);
+    return reference.document(id).updateData(data);
   }
 }

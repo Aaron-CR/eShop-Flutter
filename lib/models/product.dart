@@ -11,20 +11,31 @@ class Product {
   String stock;
   String userId;
 
-  Product({this.id, this.price, this.productName, this.photoURL});
+  Product(
+      {this.id,
+      this.amazonURL,
+      this.brand,
+      this.deal,
+      this.description,
+      this.features,
+      this.photoURL,
+      this.price,
+      this.productName,
+      this.stock,
+      this.userId});
 
-  Product.fromMap(Map snapshot, String id)
-      : id = id ?? '',
-        amazonURL = snapshot['amazonURL'] ?? '',
-        brand = snapshot['brand'] ?? '',
-        deal = snapshot['deal'] ?? '',
-        description = snapshot['description'] ?? '',
-        features = snapshot['features'] ?? '',
-        photoURL = snapshot['photoURL'] ?? '',
-        price = snapshot['price'] ?? '',
-        productName = snapshot['productName'] ?? '',
-        stock = snapshot['stock'] ?? '',
-        userId = snapshot['userId'] ?? '';
+  Product.fromMap(Map<String, dynamic> data)
+      : id = data['id'],
+        amazonURL = data['amazonURL'],
+        brand = data['brand'],
+        deal = data['deal'],
+        description = data['description'],
+        features = data['features'],
+        photoURL = data['photoURL'],
+        price = data['price'],
+        productName = data['productName'],
+        stock = data['stock'],
+        userId = data['userId'];
 
   toJson() {
     return {

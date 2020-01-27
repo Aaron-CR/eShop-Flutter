@@ -3,10 +3,12 @@ import 'package:eshop/models/product.dart';
 import 'package:eshop/router.dart';
 import 'package:eshop/services/auth.dart';
 import 'package:eshop/services/crud.dart';
+import 'package:eshop/shared/constants.dart';
 import 'package:eshop/widgets/spinner.dart';
 import 'package:eshop/widgets/product_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,28 +34,79 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: kMainColor,
         onPressed: () {
-          Navigator.pushNamed(context, '/addProduct');
+          Navigator.pushNamed(context, addProductRoute);
         },
         child: Icon(Icons.add),
       ),
       body: Container(
         child: StreamBuilder(
-            stream: productProvider.fetchProductsAsStream(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (snapshot.hasData) {
-                products = snapshot.data.documents
-                    .map((doc) => Product.fromMap(doc.data, doc.documentID))
-                    .toList();
-                return ListView.builder(
+          stream: productProvider.fetchProductsAsStream(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              products = snapshot.data.documents
+                  .map((doc) => Product.fromMap(doc.data))
+                  .toList();
+              return RefreshIndicator(
+                onRefresh: () {},
+                child: StaggeredGridView.countBuilder(
+                  padding: EdgeInsets.all(6.0),
+                  crossAxisCount: 4,
                   itemCount: products.length,
                   itemBuilder: (buildContext, index) =>
-                      ProductCard(productDetails: products[index]),
-                );
-              } else {
-                return Text('fetching');
-              }
-            }),
+                      //ProductCard(product: products[index]),
+                      Text('s'),
+                  staggeredTileBuilder: (_) => StaggeredTile.fit(2),
+                ),
+              );
+            } else {
+              return Spinner();
+            }
+          },
+        ),
+
+        /// Using StreamBuilder instead of FutureBuilder for instant UI update
+        /* 
+        
+        FutureBuilder(
+          future: productProvider.fetchProducts(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return StaggeredGridView.countBuilder(
+                padding: EdgeInsets.all(6.0),
+                crossAxisCount: 4,
+                itemCount: snapshot.data.length,
+                itemBuilder: (buildContext, index) =>
+                    ProductCard(product: snapshot.data[index]),
+                staggeredTileBuilder: (_) => StaggeredTile.fit(2),
+              );
+            } else {
+              return Spinner();
+            }
+          },
+        ),
+
+        StreamBuilder(
+          stream: productProvider.fetchProductsAsStream(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasData) {
+              products = snapshot.data.documents
+                  .map((doc) => Product.fromMap(doc.data, doc.documentID))
+                  .toList();
+              return StaggeredGridView.countBuilder(
+                padding: EdgeInsets.all(6.0),
+                crossAxisCount: 4,
+                itemCount: products.length,
+                itemBuilder: (buildContext, index) =>
+                    ProductCard(product: products[index]),
+                staggeredTileBuilder: (_) => StaggeredTile.fit(2),
+              );
+            } else {
+              return Spinner();
+            }
+          },
+        ), */
       ),
     );
   }
@@ -68,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: <Widget>[
                 UserAccountsDrawerHeader(
                   onDetailsPressed: () {
-                    Navigator.of(context).popAndPushNamed(profileRoute);
+                    Navigator.of(context).popAndPushNamed(accountRoute);
                   },
                   accountName: Text(
                     user.data.displayName.toString(),
@@ -81,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: BoxDecoration(color: Colors.grey[50]),
                   currentAccountPicture: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).popAndPushNamed(profileRoute);
+                      Navigator.of(context).popAndPushNamed(accountRoute);
                     },
                     child: CircleAvatar(
                       backgroundImage:
@@ -101,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   title: Text('My account'),
                   leading: Icon(Icons.account_circle),
                   onTap: () {
-                    Navigator.of(context).popAndPushNamed(profileRoute);
+                    Navigator.of(context).popAndPushNamed(accountRoute);
                   },
                 ),
                 ListTile(

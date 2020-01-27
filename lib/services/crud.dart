@@ -11,9 +11,8 @@ class Crud extends ChangeNotifier {
 
   Future<List<Product>> fetchProducts() async {
     var result = await _api.getDataCollection();
-    products = result.documents
-        .map((doc) => Product.fromMap(doc.data, doc.documentID))
-        .toList();
+    products =
+        result.documents.map((doc) => Product.fromMap(doc.data)).toList();
     return products;
   }
 
@@ -23,7 +22,7 @@ class Crud extends ChangeNotifier {
 
   Future<Product> getProductById(String id) async {
     var doc = await _api.getDocumentById(id);
-    return Product.fromMap(doc.data, doc.documentID);
+    return Product.fromMap(doc.data);
   }
 
   Future removeProduct(String id) async {

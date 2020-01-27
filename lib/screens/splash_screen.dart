@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return Container(
       color: kMainColor,
       child: Center(
-        child: Text(
-          "Splash Screen",
-          style: kLabelStyle,
+        child: Image.asset(
+          "assets/images/launch_image.png",
+          height: MediaQuery.of(context).size.height * 0.13,
         ),
       ),
     );

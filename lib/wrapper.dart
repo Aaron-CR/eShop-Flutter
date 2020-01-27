@@ -1,3 +1,5 @@
+import 'package:eshop/screens/aTest.dart';
+import 'package:eshop/screens/bTest/bTest.dart';
 import 'package:eshop/screens/splash_screen.dart';
 import 'package:eshop/widgets/spinner.dart';
 import 'package:flutter/material.dart';
@@ -15,15 +17,16 @@ class Wrapper extends StatelessWidget {
       create: (BuildContext context) => AuthService.instance(),
       child: Consumer(
         builder: (context, AuthService user, _) {
+          print(user.status);
           switch (user.status) {
+            // TODO: not showing SplashScreen correctly
             case Status.Uninitialized:
               return SplashScreen();
             case Status.Unauthenticated:
-              return AuthenticateScreen();
             case Status.Authenticating:
-              return Spinner();
+              return AuthenticateScreen();
             case Status.Authenticated:
-              return HomeScreen();
+              return Test();
           }
           return null;
         },

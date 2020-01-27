@@ -5,6 +5,9 @@ final kMainColor = Color(0xFFE84444);
 final kWhiteTextStyle = TextStyle(
   color: Colors.white,
 );
+final kBlackTextStyle = TextStyle(
+  color: Colors.black54,
+);
 
 final kHintTextStyle = TextStyle(
   color: Colors.black54,

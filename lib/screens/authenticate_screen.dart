@@ -231,6 +231,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              // TODO: implements facebool login
               // Facebook
               CircularButton(
                 onPressed: () {
