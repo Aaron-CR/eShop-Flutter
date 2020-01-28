@@ -5,7 +5,6 @@ import 'package:eshop/old-model/services/auth.dart';
 import 'package:eshop/old-model/services/crud.dart';
 import 'package:eshop/old-model/shared/constants.dart';
 import 'package:eshop/old-model/widgets/spinner.dart';
-import 'package:eshop/old-model/widgets/product_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -49,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   .map((doc) => Product.fromMap(doc.data))
                   .toList();
               return RefreshIndicator(
-                onRefresh: () {},
                 child: StaggeredGridView.countBuilder(
                   padding: EdgeInsets.all(6.0),
                   crossAxisCount: 4,
@@ -59,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text('s'),
                   staggeredTileBuilder: (_) => StaggeredTile.fit(2),
                 ),
+                onRefresh: () {},
               );
             } else {
               return Spinner();

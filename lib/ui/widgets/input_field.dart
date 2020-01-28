@@ -1,122 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:eshop/old-model/shared/constants.dart';
 import 'package:eshop/ui/shared/shared_styles.dart';
-import 'package:eshop/ui/shared/ui_helpers.dart';
 
-import 'note_text.dart';
-
+// TODO: add empty validator as default
 class InputField extends StatefulWidget {
+  final Function(String) validator;
+  final TextInputType keyboardType;
+  final bool obscureText;
   final TextEditingController controller;
-  final TextInputType textInputType;
-  final bool password;
-  final bool isReadOnly;
-  final String placeholder;
-  final String validationMessage;
+  final Function(String) onChanged;
+  final String hintText;
+  final IconData icon;
   final Function enterPressed;
-  final bool smallVersion;
   final FocusNode fieldFocusNode;
   final FocusNode nextFocusNode;
   final TextInputAction textInputAction;
-  final String additionalNote;
-  final Function(String) onChanged;
   final TextInputFormatter formatter;
 
-  InputField(
-      {@required this.controller,
-      @required this.placeholder,
-      this.enterPressed,
-      this.fieldFocusNode,
-      this.nextFocusNode,
-      this.additionalNote,
-      this.onChanged,
-      this.formatter,
-      this.validationMessage,
-      this.textInputAction = TextInputAction.next,
-      this.textInputType = TextInputType.text,
-      this.password = false,
-      this.isReadOnly = false,
-      this.smallVersion = false});
+  InputField({
+    @required this.controller,
+    @required this.hintText,
+    @required this.icon,
+    this.enterPressed,
+    this.fieldFocusNode,
+    this.nextFocusNode,
+    this.onChanged,
+    this.validator,
+    this.formatter,
+    this.textInputAction = TextInputAction.next,
+    this.keyboardType = TextInputType.text,
+    this.obscureText = false,
+  });
 
   @override
   _InputFieldState createState() => _InputFieldState();
 }
 
 class _InputFieldState extends State<InputField> {
-  bool isPassword;
-  double fieldHeight = 55;
+  bool obscureText;
 
   @override
   void initState() {
     super.initState();
-    isPassword = widget.password;
+    obscureText = widget.obscureText;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Stack(
       children: <Widget>[
         Container(
-          height: widget.smallVersion ? 40 : fieldHeight,
-          alignment: Alignment.centerLeft,
-          padding: fieldPadding,
-          decoration:
-              widget.isReadOnly ? disabledFieldDecortaion : fieldDecortaion,
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: TextFormField(
-                  controller: widget.controller,
-                  keyboardType: widget.textInputType,
-                  focusNode: widget.fieldFocusNode,
-                  textInputAction: widget.textInputAction,
-                  onChanged: widget.onChanged,
-                  inputFormatters:
-                      widget.formatter != null ? [widget.formatter] : null,
-                  onEditingComplete: () {
-                    if (widget.enterPressed != null) {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      widget.enterPressed();
-                    }
-                  },
-                  onFieldSubmitted: (value) {
-                    if (widget.nextFocusNode != null) {
-                      widget.nextFocusNode.requestFocus();
-                    }
-                  },
-                  obscureText: isPassword,
-                  readOnly: widget.isReadOnly,
-                  decoration: InputDecoration.collapsed(
-                      hintText: widget.placeholder,
-                      hintStyle:
-                          TextStyle(fontSize: widget.smallVersion ? 12 : 15)),
-                ),
-              ),
-              GestureDetector(
-                onTap: () => setState(() {
-                  isPassword = !isPassword;
-                }),
-                child: widget.password
-                    ? Container(
-                        width: fieldHeight,
-                        height: fieldHeight,
-                        alignment: Alignment.center,
-                        child: Icon(isPassword
-                            ? Icons.visibility
-                            : Icons.visibility_off))
-                    : Container(),
-              ),
-            ],
-          ),
+          height: fieldHeight,
+          decoration: kBoxDecorationStyle,
         ),
-        if (widget.validationMessage != null)
-          NoteText(
-            widget.validationMessage,
-            color: Colors.red,
-          ),
-        if (widget.additionalNote != null) verticalSpace(5),
-        if (widget.additionalNote != null) NoteText(widget.additionalNote),
-        verticalSpaceSmall
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: TextFormField(
+                validator: widget.validator,
+                keyboardType: widget.keyboardType,
+                obscureText: obscureText,
+                controller: widget.controller,
+                onChanged: widget.onChanged,
+                decoration: InputDecoration(
+                  errorStyle: kErrorTextStyle,
+                  border: InputBorder.none,
+                  hintText: widget.hintText,
+                  hintStyle: kHintTextStyle,
+                  prefixIcon: Icon(
+                    widget.icon,
+                    color: Colors.black54,
+                  ),
+                ),
+                textInputAction: widget.textInputAction,
+                focusNode: widget.fieldFocusNode,
+                inputFormatters:
+                    widget.formatter != null ? [widget.formatter] : null,
+                onEditingComplete: () {
+                  if (widget.enterPressed != null) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    widget.enterPressed();
+                  }
+                },
+                onFieldSubmitted: (value) {
+                  if (widget.nextFocusNode != null) {
+                    widget.nextFocusNode.requestFocus();
+                  }
+                },
+              ),
+            ),
+            GestureDetector(
+              onTap: () => setState(() {
+                obscureText = !obscureText;
+              }),
+              child: widget.obscureText
+                  ? Container(
+                      width: fieldHeight,
+                      height: fieldHeight,
+                      alignment: Alignment.center,
+                      child: Icon(
+                        obscureText ? Icons.visibility : Icons.visibility_off,
+                        color: Colors.black54,
+                      ),
+                    )
+                  : Container(),
+            ),
+          ],
+        ),
       ],
     );
   }

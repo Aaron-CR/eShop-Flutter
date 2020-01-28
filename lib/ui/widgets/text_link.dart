@@ -1,3 +1,4 @@
+import 'package:eshop/ui/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class TextLink extends StatelessWidget {
@@ -9,9 +10,27 @@ class TextLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: 'Need an Account? ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            TextSpan(
+              text: 'Sign Up',
+              style: TextStyle(
+                color: kMainColor,
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

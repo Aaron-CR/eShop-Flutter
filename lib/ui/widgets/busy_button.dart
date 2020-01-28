@@ -1,3 +1,4 @@
+import 'package:eshop/old-model/shared/constants.dart';
 import 'package:eshop/ui/shared/shared_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,37 @@ class BusyButton extends StatefulWidget {
 class _BusyButtonState extends State<BusyButton> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20.0),
+      width: double.infinity,
+      child: RaisedButton(
+        elevation: 5.0,
+        onPressed: widget.onPressed,
+        padding: EdgeInsets.all(18.0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0),
+        ),
+        color: kMainColor,
+        child: !widget.busy
+            ? Text(
+                widget.title,
+                style: buttonTitleTextStyle,
+              )
+            : SizedBox(
+                width: 20.0,
+                height: 20.0,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              ),
+      ),
+    );
+  }
+}
+
+/* 
+GestureDetector(
       onTap: widget.onPressed,
       child: InkWell(
         child: AnimatedContainer(
@@ -46,5 +77,5 @@ class _BusyButtonState extends State<BusyButton> {
         ),
       ),
     );
-  }
-}
+
+ */

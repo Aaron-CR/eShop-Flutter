@@ -3,7 +3,6 @@ import 'package:eshop/old-model/screens/product/modify_product.dart';
 import 'package:eshop/old-model/services/crud.dart';
 import 'package:eshop/old-model/widgets/rounded_button.dart';
 import 'package:eshop/old-model/widgets/stock_label.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -24,7 +23,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final productProvider = Provider.of<Crud>(context);
-    Future<FirebaseUser> user = FirebaseAuth.instance.currentUser();
+    // Future<FirebaseUser> user = FirebaseAuth.instance.currentUser();
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Details'),

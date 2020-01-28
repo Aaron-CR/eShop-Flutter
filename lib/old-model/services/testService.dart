@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 
 class TestService extends ChangeNotifier {
   Firestore _firestore = Firestore.instance;
-  List<DocumentSnapshot> _products = [];
-  bool _loadingProducts = true;
+  List<DocumentSnapshot> products = [];
+  bool loadingProducts = true;
 
   getProducts() async {
     Query query = _firestore.collection('products').orderBy(true).limit(5);
 
-    _loadingProducts = true;
+    loadingProducts = true;
     QuerySnapshot querySnapshot = await query.getDocuments();
-    _products = querySnapshot.documents;
-    _loadingProducts = false;
+    products = querySnapshot.documents;
+    loadingProducts = false;
   }
 }

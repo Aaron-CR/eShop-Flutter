@@ -1,23 +1,24 @@
+import 'package:eshop/old-model/shared/constants.dart';
 import 'package:eshop/old-model/utils/background.dart';
+import 'package:eshop/old-model/widgets/circular_button.dart';
 import 'package:eshop/ui/shared/email_validator.dart';
 import 'package:eshop/ui/shared/ui_helpers.dart';
 import 'package:eshop/ui/widgets/busy_button.dart';
-import 'package:eshop/ui/widgets/expansion_list.dart';
 import 'package:eshop/ui/widgets/input_field.dart';
+import 'package:eshop/ui/widgets/text_link.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
-import 'package:eshop/viewmodels/signup_view_model.dart';
+import 'package:eshop/viewmodels/signin_view_model.dart';
 
-class SignUpView extends StatelessWidget {
+class SignInView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final displayNamController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelProvider<SignUpViewModel>.withConsumer(
-      viewModel: SignUpViewModel(),
+    return ViewModelProvider<SignInViewModel>.withConsumer(
+      viewModel: SignInViewModel(),
       builder: (context, model, child) => Container(
         child: Scaffold(
           body: Stack(
@@ -29,7 +30,7 @@ class SignUpView extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     Text(
-                      'Sign Up',
+                      'Sign In',
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'OpenSans',
@@ -42,12 +43,6 @@ class SignUpView extends StatelessWidget {
                       key: _formKey,
                       child: Column(
                         children: <Widget>[
-                          InputField(
-                            hintText: 'Full Name',
-                            controller: displayNamController,
-                            icon: Icons.person,
-                          ),
-                          verticalSpaceMedium,
                           InputField(
                             validator: (value) => !isEmail(value)
                                 ? 'Enter a valid email address'
@@ -67,28 +62,63 @@ class SignUpView extends StatelessWidget {
                             controller: passwordController,
                             icon: Icons.lock,
                           ),
-                          verticalSpaceMedium,
-                          ExpansionList<String>(
-                              items: ['Admin', 'User'],
-                              title: model.selectedRole,
-                              onItemSelected: model.setSelectedRole),
-                          verticalSpaceMedium,
                         ],
                       ),
                     ),
+                    forgotPasswordButton(),
                     BusyButton(
-                      title: 'Register',
+                      title: 'Login',
                       busy: model.busy,
                       onPressed: () {
                         if (_formKey.currentState.validate()) {
-                          model.signUpWithEmail(
+                          model.signInWithEmail(
                             email: emailController.text.trim(),
                             password: passwordController.text,
-                            displayName: displayNamController.text,
                           );
                         }
                       },
                     ),
+                    verticalSpaceMedium,
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '- Or Sign In with -',
+                          style: kWhiteTextStyle,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              // TODO: implements facebool login
+                              // Facebook
+                              CircularButton(
+                                onPressed: () {
+                                  model.signInWithFacebook();
+                                },
+                                image: 'assets/images/facebook-logo.png',
+                                color: Color(0xFF4267B2),
+                              ),
+                              verticalSpaceSmall,
+                              // Google
+                              CircularButton(
+                                onPressed: () {
+                                  model.signInWithGoogle();
+                                },
+                                image: 'assets/images/google-logo.png',
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    verticalSpaceMedium,
+                    TextLink(
+                      'Create an Account if you\'re new.',
+                      onPressed: () {
+                        model.navigateToSignUp();
+                      },
+                    )
                   ],
                 ),
               ),
@@ -100,42 +130,22 @@ class SignUpView extends StatelessWidget {
   }
 }
 
+// TODO: replace this for TextLink WIdget
+Widget forgotPasswordButton() {
+  return Container(
+    alignment: Alignment.centerRight,
+    child: Padding(
+      padding: const EdgeInsets.only(top: 16.0),
+      child: GestureDetector(
+        onTap: () {},
+        child: Text(
+          'Forgot Password?',
+          style: kLabelStyle,
+        ),
+      ),
+    ),
+  );
+}
 /* 
-
-InputField(
-                hintText: 'Full Name',
-                controller: displayNamController,
-                icon: Icons.person,
-              ),
-              verticalSpaceSmall,
-              InputField(
-                hintText: 'Email',
-                controller: emailController,
-                icon: Icons.email,
-              ),
-              verticalSpaceSmall,
-              InputField(
-                hintText: 'Password',
-                obscureText: true,
-                controller: passwordController,
-                icon: Icons.lock,
-              ),
-              verticalSpaceMedium,
-              ExpansionList<String>(
-                  items: ['Admin', 'User'],
-                  title: model.selectedRole,
-                  onItemSelected: model.setSelectedRole),
-              verticalSpaceMedium,
-              BusyButton(
-                title: 'Sign Up',
-                busy: model.busy,
-                onPressed: () {
-                  model.signUpWithEmail(
-                    email: emailController.text.trim(),
-                    password: passwordController.text,
-                    displayName: displayNamController.text,
-                  );
-                },
-              )
 
  */

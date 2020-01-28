@@ -1,3 +1,4 @@
+import 'package:eshop/old-model/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/ui/shared/shared_styles.dart' as sharedStyles;
 
@@ -40,11 +41,7 @@ class _ExpansionListState extends State<ExpansionList> {
           : widget.smallVersion
               ? sharedStyles.smallFieldHeight
               : startingHeight,
-      decoration: sharedStyles.fieldDecortaion.copyWith(
-        boxShadow: expanded
-            ? [BoxShadow(blurRadius: 10, color: Colors.grey[300])]
-            : null,
-      ),
+      decoration: sharedStyles.fieldDecortaion,
       child: ListView(
         physics: NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(0),
@@ -127,10 +124,7 @@ class ExpansionListItem extends StatelessWidget {
             Expanded(
               child: Text(
                 title ?? '',
-                style: Theme.of(context)
-                    .textTheme
-                    .subhead
-                    .copyWith(fontSize: smallVersion ? 12 : 15),
+                style: kHintTextStyle,
               ),
             ),
             showArrow

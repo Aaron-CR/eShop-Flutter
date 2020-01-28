@@ -14,6 +14,11 @@ final kHintTextStyle = TextStyle(
   fontFamily: 'OpenSans',
 );
 
+final kErrorTextStyle = TextStyle(
+  color: Colors.red,
+  fontWeight: FontWeight.w400,
+);
+
 final kLabelStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,

@@ -7,7 +7,7 @@ import 'package:flutter/foundation.dart';
 import '../locator.dart';
 import 'base_model.dart';
 
-class LoginViewModel extends BaseModel {
+class SignInViewModel extends BaseModel {
   final AuthenticationService _authenticationService =
       locator<AuthenticationService>();
   final DialogService _dialogService = locator<DialogService>();
@@ -25,7 +25,7 @@ class LoginViewModel extends BaseModel {
       } else {
         await _dialogService.showDialog(
           title: 'Sign In Failure',
-          description: 'General sign ing failure. Please try again later',
+          description: 'General sign in failure. Please try again later',
         );
       }
     } else {
@@ -34,6 +34,22 @@ class LoginViewModel extends BaseModel {
         description: authResult,
       );
     }
+  }
+
+  void signInWithGoogle() async {
+    await _dialogService.showDialog(
+      title: 'Sign In Failure',
+      description:
+          'Sorry this feature is not available right now. Please try again later',
+    );
+  }
+
+  void signInWithFacebook() async {
+    await _dialogService.showDialog(
+      title: 'Sign In Failure',
+      description:
+          'Sorry this feature is not available right now. Please try again later',
+    );
   }
 
   void navigateToSignUp() {

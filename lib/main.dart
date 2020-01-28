@@ -2,6 +2,7 @@ import 'package:eshop/ui/views/startup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/services/navigation_service.dart';
 import 'package:eshop/services/dialog_service.dart';
+import 'package:flutter/services.dart';
 import 'managers/dialog_manager.dart';
 import 'ui/router.dart';
 import 'locator.dart';
@@ -16,6 +17,11 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+    ));
+
     return MaterialApp(
       title: 'eShop',
       builder: (context, child) => Navigator(

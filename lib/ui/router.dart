@@ -1,7 +1,7 @@
 import 'package:eshop/ui/views/home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/constants/route_names.dart';
-import 'package:eshop/ui/views/login_view.dart';
+import 'package:eshop/ui/views/signin_view.dart';
 import 'package:eshop/ui/views/signup_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -9,7 +9,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case LoginViewRoute:
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: LoginView(),
+        viewToShow: SignInView(),
       );
     case SignUpViewRoute:
       return _getPageRoute(
