@@ -15,29 +15,33 @@ class ProductListView extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(18.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              '☹️',
-              style: textTheme.display4,
-            ),
-            Text(
-              'Empty List',
-              style: textTheme.display1,
-            ),
-            Text(
-              'Looks like you dont have any product.\nTry adding one',
-              style: textTheme.body1,
-            ),
-            verticalSpaceMedium,
-            RaisedButton(
-              onPressed: () {
-                // TODO: add routing to ProductFormView.
-              },
-              child: Text('Add Product'),
-            )
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                '☹️',
+                style: textTheme.display3,
+              ),
+              Text(
+                'Empty List',
+                style: textTheme.headline,
+              ),
+              verticalSpaceSmall,
+              Text(
+                'Looks like you dont have any product.\nTry adding one',
+                style: textTheme.caption,
+                textAlign: TextAlign.center,
+              ),
+              verticalSpaceMedium,
+              RaisedButton(
+                onPressed: () {
+                  // TODO: add routing to ProductFormView.
+                },
+                child: Text('Add Product'),
+              )
+            ],
+          ),
         ),
       ),
     );

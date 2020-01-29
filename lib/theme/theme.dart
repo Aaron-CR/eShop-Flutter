@@ -69,10 +69,9 @@ ColorScheme colorScheme = ColorScheme(
 ThemeData themeData = ThemeData(
   colorScheme: colorScheme,
   primaryColor: colorScheme.primary,
-  accentColor: colorScheme.secondary,
+  primarySwatch: Colors.red,
   backgroundColor: colorScheme.background,
   scaffoldBackgroundColor: colorScheme.background,
-  //primarySwatch: Colors.red,
   appBarTheme: AppBarTheme(
     elevation: 0.0,
     textTheme: textTheme.apply(bodyColor: Colors.white),
@@ -81,7 +80,7 @@ ThemeData themeData = ThemeData(
     foregroundColor: Colors.white,
     backgroundColor: colorScheme.primary,
   ),
-  buttonTheme: ButtonThemeData(
+  /* buttonTheme: ButtonThemeData(
     minWidth: 200.0,
     height: 50.0,
     padding: EdgeInsets.all(18.0),
@@ -89,7 +88,7 @@ ThemeData themeData = ThemeData(
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     ),
-  ),
+  ), */
   textTheme: textTheme,
   primaryTextTheme: textTheme,
   accentTextTheme: textTheme,
