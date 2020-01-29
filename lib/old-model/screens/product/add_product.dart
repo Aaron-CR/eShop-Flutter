@@ -1,4 +1,4 @@
-import 'package:eshop/old-model/models/product.dart';
+import 'package:eshop/models/product_models.dart';
 import 'package:eshop/old-model/services/crud.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +75,7 @@ class _AddProductState extends State<AddProduct> {
                     _formKey.currentState.save();
                     await productProvider.addProduct(Product(
                         productName: title,
-                        price: price,
+                        //price: price.toDouble,
                         photoURL: productType.toLowerCase()));
                     Navigator.pop(context);
                   }

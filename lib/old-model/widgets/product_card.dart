@@ -1,4 +1,4 @@
-import 'package:eshop/old-model/models/product.dart';
+import 'package:eshop/models/product_models.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {

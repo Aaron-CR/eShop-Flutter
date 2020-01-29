@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eshop/old-model/models/product.dart';
+import 'package:eshop/models/product_models.dart';
 import 'package:eshop/old-model/router.dart';
 import 'package:eshop/old-model/services/auth.dart';
 import 'package:eshop/old-model/services/crud.dart';
@@ -7,7 +7,6 @@ import 'package:eshop/old-model/shared/constants.dart';
 import 'package:eshop/old-model/widgets/spinner.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,9 +42,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: StreamBuilder(
           stream: productProvider.fetchProductsAsStream(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
+            /* if (snapshot.hasData) {
               products = snapshot.data.documents
-                  .map((doc) => Product.fromMap(doc.data))
+                  .map((doc) => Product.fromMap(doc.data,))
                   .toList();
               return RefreshIndicator(
                 child: StaggeredGridView.countBuilder(
@@ -61,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             } else {
               return Spinner();
-            }
+            } */
           },
         ),
 

@@ -1,4 +1,4 @@
-import 'package:eshop/old-model/models/product.dart';
+import 'package:eshop/models/product_models.dart';
 import 'package:eshop/old-model/services/crud.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -53,7 +53,7 @@ class _ModifyProductState extends State<ModifyProduct> {
                 height: 16,
               ),
               TextFormField(
-                  initialValue: widget.product.price,
+                  // initialValue: widget.product.price,
                   keyboardType: TextInputType.numberWithOptions(),
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -87,7 +87,7 @@ class _ModifyProductState extends State<ModifyProduct> {
                     await productProvider.updateProduct(
                         Product(
                             productName: title,
-                            price: price,
+                            //price: price,
                             photoURL: productType.toLowerCase()),
                         widget.product.id);
                     Navigator.pop(context);

@@ -21,7 +21,7 @@ class InputField extends StatefulWidget {
   InputField({
     @required this.controller,
     @required this.hintText,
-    @required this.icon,
+    this.icon,
     this.enterPressed,
     this.fieldFocusNode,
     this.nextFocusNode,

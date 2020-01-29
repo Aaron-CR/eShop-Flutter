@@ -1,4 +1,4 @@
-import 'package:eshop/old-model/models/product.dart';
+import 'package:eshop/models/product_models.dart';
 import 'package:eshop/old-model/screens/product/modify_product.dart';
 import 'package:eshop/old-model/services/crud.dart';
 import 'package:eshop/old-model/widgets/rounded_button.dart';
@@ -22,8 +22,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final productProvider = Provider.of<Crud>(context);
-    // Future<FirebaseUser> user = FirebaseAuth.instance.currentUser();
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Details'),
@@ -31,23 +29,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           IconButton(
             iconSize: 35,
             icon: Icon(Icons.delete_forever),
-            onPressed: () async {
-              await productProvider.removeProduct(widget.product.id);
-              Navigator.pop(context);
-            },
+            onPressed: () {},
           ),
-          IconButton(
-            iconSize: 35,
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (_) => ModifyProduct(
-                            product: widget.product,
-                          )));
-            },
-          )
         ],
       ),
       // TODO: review if ListView is the best Widget for this case

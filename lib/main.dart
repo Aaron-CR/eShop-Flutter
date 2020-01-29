@@ -1,3 +1,4 @@
+import 'package:eshop/old-model/utils/theme-data.dart';
 import 'package:eshop/ui/views/startup_view.dart';
 import 'package:flutter/material.dart';
 import 'package:eshop/services/navigation_service.dart';
@@ -30,13 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (context) => DialogManager(child: child)),
       ),
       navigatorKey: locator<NavigationService>().navigationKey,
-      theme: ThemeData(
-        primaryColor: Color.fromARGB(255, 9, 202, 172),
-        backgroundColor: Color.fromARGB(255, 26, 27, 30),
-        textTheme: Theme.of(context).textTheme.apply(
-              fontFamily: 'Open Sans',
-            ),
-      ),
+      theme: themeData(),
       home: StartUpView(),
       onGenerateRoute: generateRoute,
     );
