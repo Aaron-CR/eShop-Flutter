@@ -33,7 +33,7 @@ bool isPortrait(BuildContext context) =>
     orientation(context) == Orientation.portrait;
 
 double screenHeightFraction(BuildContext context,
-        {int dividedBy = 1, double offsetBy = 0}) =>
+        {double dividedBy = 1, double offsetBy = 0}) =>
     (screenHeight(context) - offsetBy) / dividedBy;
 
 double screenWidthFraction(BuildContext context,

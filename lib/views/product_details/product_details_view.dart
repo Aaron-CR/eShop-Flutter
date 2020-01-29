@@ -21,10 +21,9 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Product Details'),
+        title: Text('Product'),
         actions: <Widget>[
           IconButton(
-            iconSize: 35,
             icon: Icon(Icons.delete_forever),
             onPressed: () {},
           ),

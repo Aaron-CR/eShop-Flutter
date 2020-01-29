@@ -21,6 +21,11 @@ class ProductFormView extends StatelessWidget {
         model.setEdittingPost(edittingProduct);
       },
       builder: (context, model, child) => Scaffold(
+          appBar: AppBar(
+            title: Text(
+              'Create an Product',
+            ),
+          ),
           floatingActionButton: FloatingActionButton(
             child: !model.busy
                 ? Icon(Icons.add)

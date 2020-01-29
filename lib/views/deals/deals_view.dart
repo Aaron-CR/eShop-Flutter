@@ -11,12 +11,11 @@ class DealsView extends StatelessWidget {
           'Deals',
         ),
       ),
-      body: Container(
-          child: Center(
+      body: Center(
         child: Container(
           child: Text('Deals'),
         ),
-      )),
+      ),
     );
   }
 }

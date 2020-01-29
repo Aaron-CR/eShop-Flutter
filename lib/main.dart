@@ -5,7 +5,7 @@ import 'package:eshop/core/managers/dialog_manager.dart';
 import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/core/services/dialog_service.dart';
 import 'package:eshop/views/startup/startup_view.dart';
-import 'package:eshop/theme/theme-data.dart';
+import 'package:eshop/theme/theme.dart';
 import 'package:eshop/router.dart';
 
 void main() {
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
             builder: (context) => DialogManager(child: child)),
       ),
       navigatorKey: locator<NavigationService>().navigationKey,
-      theme: themeData(),
+      theme: themeData,
       home: StartUpView(),
       onGenerateRoute: generateRoute,
     );
