@@ -23,7 +23,14 @@ Widget spacedDivider = Column(
 Widget verticalSpace(double height) => SizedBox(height: height);
 
 double screenWidth(BuildContext context) => MediaQuery.of(context).size.width;
+
 double screenHeight(BuildContext context) => MediaQuery.of(context).size.height;
+
+Orientation orientation(BuildContext context) =>
+    MediaQuery.of(context).orientation;
+
+bool isPortrait(BuildContext context) =>
+    orientation(context) == Orientation.portrait;
 
 double screenHeightFraction(BuildContext context,
         {int dividedBy = 1, double offsetBy = 0}) =>

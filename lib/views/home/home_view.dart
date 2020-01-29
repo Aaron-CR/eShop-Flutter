@@ -1,3 +1,4 @@
+import 'package:eshop/shared/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -90,8 +91,8 @@ class HomeView extends StatelessWidget {
           child: model.products != null
               ? StaggeredGridView.countBuilder(
                   padding: EdgeInsets.all(6.0),
-                  staggeredTileBuilder: (_) => StaggeredTile.fit(2),
-                  crossAxisCount: 4,
+                  staggeredTileBuilder: (_) => StaggeredTile.fit(1),
+                  crossAxisCount: isPortrait(context) ? 2 : 3,
                   itemCount: model.products.length,
                   itemBuilder: (context, index) => GestureDetector(
                     onTap: () => model.editPost(index),
