@@ -1,12 +1,12 @@
-import 'package:eshop/old-model/utils/theme-data.dart';
-import 'package:eshop/ui/views/startup_view.dart';
 import 'package:flutter/material.dart';
-import 'package:eshop/services/navigation_service.dart';
-import 'package:eshop/services/dialog_service.dart';
 import 'package:flutter/services.dart';
-import 'managers/dialog_manager.dart';
-import 'ui/router.dart';
-import 'locator.dart';
+import 'package:eshop/core/locator.dart';
+import 'package:eshop/core/managers/dialog_manager.dart';
+import 'package:eshop/core/services/navigation_service.dart';
+import 'package:eshop/core/services/dialog_service.dart';
+import 'package:eshop/views/startup/startup_view.dart';
+import 'package:eshop/theme/theme-data.dart';
+import 'package:eshop/router.dart';
 
 void main() {
   // Register all the models and services before the app starts
