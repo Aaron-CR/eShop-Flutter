@@ -12,41 +12,18 @@ class HomeViewModel extends BaseModel {
   final DialogService _dialogService = locator<DialogService>();
 
   List<Product> _products;
-  Stream<List<Product>> _productsStream;
   List<Product> get products => _products;
 
-  Future fetchProducts() async {
+  void listenToProducts() {
     setBusy(true);
-    // TODO: Find or Create a TaskType that will automaticall do the setBusy(true/false) when being run.
-    var productsResults = await _firestoreService.getProductsOnceOff();
+    _firestoreService.listenToProductsRealTime().listen((productData) {
+      List<Product> updatedProducts = productData;
+      if (updatedProducts != null && updatedProducts.length > 0) {
+        _products = updatedProducts;
+        notifyListeners();
+      }
+    });
     setBusy(false);
-
-    if (productsResults is List<Product>) {
-      _products = productsResults;
-      notifyListeners();
-    } else {
-      await _dialogService.showDialog(
-        title: 'Products Update Failed',
-        description: productsResults,
-      );
-    }
-  }
-
-  Stream listenToProductsRealTime() {
-    setBusy(true);
-    // TODO: Find or Create a TaskType that will automaticall do the setBusy(true/false) when being run.
-    var productsResults = _firestoreService.listenToProductsRealTime();
-    setBusy(false);
-
-    if (productsResults is List<Product>) {
-      _productsStream = productsResults;
-      notifyListeners();
-    } else {
-      _dialogService.showDialog(
-        title: 'Products Update Failed',
-        description: 'Products Update Failed',
-      );
-    }
   }
 
   Future deleteProduct(int index) async {
@@ -66,7 +43,7 @@ class HomeViewModel extends BaseModel {
 
   Future navigateToCreateView() async {
     await _navigationService.navigateTo(CreateProductViewRoute);
-    await fetchProducts();
+    await listenToProducts();
   }
 
   void editPost(int index) {
