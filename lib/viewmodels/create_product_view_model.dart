@@ -11,10 +11,23 @@ class CreateProductViewModel extends BaseModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
+  Product _edittingProduct;
+  bool get _edditting => _edittingProduct != null;
+
   Future addProduct({@required String productName}) async {
     setBusy(true);
-    var result = await _firestoreService
-        .addProduct(Product(productName: productName, userId: currentUser.uid));
+
+    var result;
+    if (!_edditting) {
+      result = await _firestoreService.addProduct(
+          Product(productName: productName, userId: currentUser.uid));
+    } else {
+      result = await _firestoreService.updateProduct(Product(
+        productName: productName,
+        userId: _edittingProduct.userId,
+        id: _edittingProduct.id,
+      ));
+    }
     setBusy(false);
 
     if (result is String) {
@@ -30,5 +43,9 @@ class CreateProductViewModel extends BaseModel {
     }
 
     _navigationService.pop();
+  }
+
+  void setEdittingPost(Product edittingProduct) {
+    _edittingProduct = edittingProduct;
   }
 }

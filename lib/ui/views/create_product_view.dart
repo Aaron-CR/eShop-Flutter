@@ -18,7 +18,7 @@ class CreateProductView extends StatelessWidget {
         // update the text in the controller
         productNameController.text = edittingProduct?.productName ?? '';
 
-        //model.setEdittingPost(edittingProduct);
+        model.setEdittingPost(edittingProduct);
       },
       builder: (context, model, child) => Scaffold(
           floatingActionButton: FloatingActionButton(

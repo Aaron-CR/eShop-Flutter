@@ -43,7 +43,6 @@ class HomeViewModel extends BaseModel {
 
   Future navigateToCreateView() async {
     await _navigationService.navigateTo(CreateProductViewRoute);
-    await listenToProducts();
   }
 
   void editPost(int index) {
