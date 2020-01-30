@@ -80,15 +80,14 @@ ThemeData themeData = ThemeData(
     foregroundColor: Colors.white,
     backgroundColor: colorScheme.primary,
   ),
-  /* buttonTheme: ButtonThemeData(
-    minWidth: 200.0,
-    height: 50.0,
-    padding: EdgeInsets.all(18.0),
+  buttonColor: colorScheme.primary,
+  buttonTheme: ButtonThemeData(
+    padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
     textTheme: ButtonTextTheme.primary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),
     ),
-  ), */
+  ),
   textTheme: textTheme,
   primaryTextTheme: textTheme,
   accentTextTheme: textTheme,

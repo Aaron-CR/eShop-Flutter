@@ -8,6 +8,9 @@ import 'package:eshop/widgets/input_field.dart';
 
 class ProductFormView extends StatelessWidget {
   final productNameController = TextEditingController();
+
+  // TODO: only accept . (dot)
+  final String price = '120.6';
   final Product edittingProduct;
   ProductFormView({Key key, this.edittingProduct}) : super(key: key);
 
@@ -35,22 +38,23 @@ class ProductFormView extends StatelessWidget {
                 ),
           onPressed: () {
             if (!model.busy) {
-              model.addProduct(productName: productNameController.text);
+              model.addProduct(
+                productName: productNameController.text,
+                price: double.parse(price),
+              );
             }
           },
           backgroundColor:
-              !model.busy ? Theme.of(context).primaryColor : Colors.grey[600],
+              !model.busy ? Theme.of(context).primaryColor : Colors.grey[200],
         ),
         body: StepperBody(),
       ),
     );
   }
 
-  
-
   Padding buildBody() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      padding: EdgeInsets.symmetric(horizontal: 30.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

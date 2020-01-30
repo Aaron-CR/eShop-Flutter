@@ -14,16 +14,18 @@ class ProductFormViewModel extends BaseViewModel {
   Product _edittingProduct;
   bool get _edditting => _edittingProduct != null;
 
-  Future addProduct({@required String productName}) async {
+  Future addProduct(
+      {@required String productName, @required double price}) async {
     setBusy(true);
 
     var result;
     if (!_edditting) {
-      result = await _firestoreService.addProduct(
-          Product(productName: productName, userId: currentUser.uid));
+      result = await _firestoreService.addProduct(Product(
+          productName: productName, price: price, userId: currentUser.uid));
     } else {
       result = await _firestoreService.updateProduct(Product(
         productName: productName,
+        price: price,
         userId: _edittingProduct.userId,
         id: _edittingProduct.id,
       ));
