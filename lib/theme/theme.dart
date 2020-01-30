@@ -82,7 +82,8 @@ ThemeData themeData = ThemeData(
   ),
   buttonColor: colorScheme.primary,
   buttonTheme: ButtonThemeData(
-    padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+    height: 50.0,
+    padding: EdgeInsets.symmetric(horizontal: 42.0, vertical: 8.0),
     textTheme: ButtonTextTheme.primary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(30.0),

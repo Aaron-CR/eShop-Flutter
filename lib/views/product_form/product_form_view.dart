@@ -1,3 +1,4 @@
+import 'package:eshop/views/product_form/horizontaltest.dart';
 import 'package:eshop/views/product_form/test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
@@ -30,7 +31,7 @@ class ProductFormView extends StatelessWidget {
             'Create an Product',
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        /* floatingActionButton: FloatingActionButton(
           child: !model.busy
               ? Icon(Icons.add)
               : CircularProgressIndicator(
@@ -46,8 +47,8 @@ class ProductFormView extends StatelessWidget {
           },
           backgroundColor:
               !model.busy ? Theme.of(context).primaryColor : Colors.grey[200],
-        ),
-        body: StepperBody(),
+        ), */
+        body: HorizontalStepperBody(),
       ),
     );
   }
