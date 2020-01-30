@@ -1,3 +1,4 @@
+import 'package:eshop/views/product_form/product_form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:eshop/core/locator.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<NavigationService>().navigationKey,
       theme: themeData,
-      home: StartUpView(),
+      home: ProductFormView(),
       onGenerateRoute: generateRoute,
     );
   }
