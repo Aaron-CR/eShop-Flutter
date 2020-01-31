@@ -14,6 +14,7 @@ class HomeViewModel extends BaseViewModel {
   List<Product> _products;
   List<Product> get products => _products;
 
+  // TODO(FilledStacks): expose the stream through the viewmodel instead of subscribing and use it in your builder.﻿
   void listenToProducts() {
     setBusy(true);
     _firestoreService.listenToProductsRealTime().listen((productData) {

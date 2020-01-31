@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: locator<NavigationService>().navigationKey,
       theme: themeData,
-      home: ProductFormView(),
+      home: StartUpView(),
       onGenerateRoute: generateRoute,
     );
   }

@@ -52,38 +52,4 @@ class ProductFormView extends StatelessWidget {
       ),
     );
   }
-
-  Padding buildBody() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 30.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          verticalSpace(40),
-          Text(
-            'Create Post',
-            style: TextStyle(fontSize: 26),
-          ),
-          verticalSpaceMedium,
-          InputField(
-            hintText: 'Product Name',
-            controller: productNameController,
-          ),
-          verticalSpaceMedium,
-          Text('Post Image'),
-          verticalSpaceSmall,
-          Container(
-            height: 250,
-            decoration: BoxDecoration(
-                color: Colors.white, borderRadius: BorderRadius.circular(10)),
-            alignment: Alignment.center,
-            child: Text(
-              'Tap to add post image',
-              style: TextStyle(color: Colors.grey[400]),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 }

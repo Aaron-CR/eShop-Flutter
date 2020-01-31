@@ -1,3 +1,5 @@
+import 'package:eshop/core/locator.dart';
+import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
@@ -6,6 +8,8 @@ import 'package:eshop/views/home/home_view_model.dart';
 import 'package:eshop/shared/app_colors.dart';
 import 'package:eshop/widgets/product_item.dart';
 import 'package:eshop/constants/route_names.dart';
+
+final NavigationService _navigationService = locator<NavigationService>();
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
@@ -29,7 +33,7 @@ class HomeView extends StatelessWidget {
                   children: <Widget>[
                     UserAccountsDrawerHeader(
                       onDetailsPressed: () {
-                        Navigator.of(context).popAndPushNamed(AccountRoute);
+                        _navigationService.popAndNavigateTo(AccountRoute);
                       },
                       accountName: Text(
                         'User Name',
@@ -42,7 +46,7 @@ class HomeView extends StatelessWidget {
                       decoration: BoxDecoration(color: Colors.grey[50]),
                       currentAccountPicture: GestureDetector(
                         onTap: () {
-                          Navigator.of(context).popAndPushNamed(AccountRoute);
+                          _navigationService.popAndNavigateTo(AccountRoute);
                         },
                         child: CircleAvatar(
                           backgroundImage:
@@ -55,21 +59,21 @@ class HomeView extends StatelessWidget {
                       title: Text('Deals'),
                       leading: Icon(Icons.local_offer),
                       onTap: () {
-                        Navigator.of(context).popAndPushNamed(DealsRoute);
+                        _navigationService.popAndNavigateTo(DealsRoute);
                       },
                     ),
                     ListTile(
                       title: Text('My account'),
                       leading: Icon(Icons.account_circle),
                       onTap: () {
-                        Navigator.of(context).popAndPushNamed(AccountRoute);
+                        _navigationService.popAndNavigateTo(AccountRoute);
                       },
                     ),
                     ListTile(
                       title: Text('Product List'),
                       leading: Icon(Icons.list),
                       onTap: () {
-                        Navigator.of(context).popAndPushNamed(ProductListRoute);
+                        _navigationService.popAndNavigateTo(ProductListRoute);
                       },
                     ),
                   ],

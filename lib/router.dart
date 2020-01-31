@@ -55,6 +55,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         routeName: settings.name,
         viewToShow: ProductListView(),
       );
+    case ProductFormRoute:
+      return _getPageRoute(
+        routeName: settings.name,
+        viewToShow: ProductFormView(),
+      );
     default:
       return MaterialPageRoute(
         builder: (_) => Scaffold(

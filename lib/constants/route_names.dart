@@ -3,6 +3,7 @@ const String SignUpViewRoute = "SignUp";
 const String HomeViewRoute = "HomeView";
 const String CreateProductViewRoute = "CreateProductView";
 const String ProductDetailsRoute = '/product-details';
+const String ProductFormRoute = '/product-form';
 const String AccountRoute = '/my-account';
 const String DealsRoute = '/deals';
 const String ProductListRoute = '/product-list';

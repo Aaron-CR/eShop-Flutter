@@ -1,6 +1,11 @@
+import 'package:eshop/constants/route_names.dart';
+import 'package:eshop/core/locator.dart';
+import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
+
+final NavigationService _navigationService = locator<NavigationService>();
 
 class ProductListView extends StatelessWidget {
   const ProductListView({Key key}) : super(key: key);
@@ -36,7 +41,7 @@ class ProductListView extends StatelessWidget {
               verticalSpaceMedium,
               RaisedButton(
                 onPressed: () {
-                  // TODO: add routing to ProductFormView.
+                  _navigationService.navigateTo(ProductFormRoute);
                 },
                 child: Text('Add Product'),
               )
