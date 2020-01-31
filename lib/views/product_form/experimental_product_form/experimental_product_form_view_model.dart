@@ -1,12 +1,12 @@
-import 'package:eshop/core/base/base_view_model.dart';
 import 'package:eshop/core/locator.dart';
 import 'package:eshop/core/models/product_models.dart';
 import 'package:eshop/core/services/dialog_service.dart';
 import 'package:eshop/core/services/firestore_service.dart';
 import 'package:eshop/core/services/navigation_service.dart';
+import 'package:eshop/core/base/base_view_model.dart';
 import 'package:flutter/foundation.dart';
 
-class ProductFormViewModel extends BaseViewModel {
+class ExperimentalProductFormViewModel extends BaseViewModel {
   final FirestoreService _firestoreService = locator<FirestoreService>();
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
@@ -14,18 +14,21 @@ class ProductFormViewModel extends BaseViewModel {
   Product _edittingProduct;
   bool get _edditting => _edittingProduct != null;
 
-  Future addProduct({@required Product product}) async {
+  Future addProduct(
+      {@required String productName, @required double price}) async {
     setBusy(true);
 
-    // TODO: add id on create a new product
     var result;
     if (!_edditting) {
-      product.userId = currentUser.uid;
-      result = await _firestoreService.addProduct(product);
+      result = await _firestoreService.addProduct(Product(
+          productName: productName, price: price, userId: currentUser.uid));
     } else {
-      product.userId = _edittingProduct.userId;
-      product.id = _edittingProduct.id;
-      result = await _firestoreService.updateProduct(product);
+      result = await _firestoreService.updateProduct(Product(
+        productName: productName,
+        price: price,
+        userId: _edittingProduct.userId,
+        id: _edittingProduct.id,
+      ));
     }
     setBusy(false);
 

@@ -1,15 +1,21 @@
-import 'package:eshop/views/product_form/horizontaltest.dart';
+import 'package:eshop/core/models/product_models.dart';
+import 'package:eshop/shared/ui_helpers.dart';
+import 'package:eshop/views/product_form/product_form_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
-import 'package:eshop/core/models/product_models.dart';
-import 'package:eshop/views/product_form/product_form_view_model.dart';
+
+import 'input_field.dart';
 
 class ProductFormView extends StatelessWidget {
-  final productNameController = TextEditingController();
-
-  // TODO: only accept . (dot)
-  final String price = '120.6';
   final Product edittingProduct;
+
+  final productNameController = TextEditingController();
+  final brandController = TextEditingController();
+  final amazonURLController = TextEditingController();
+  final photoURLController = TextEditingController();
+  final descriptionController = TextEditingController();
+  final featuresController = TextEditingController();
+
   ProductFormView({Key key, this.edittingProduct}) : super(key: key);
 
   @override
@@ -19,16 +25,16 @@ class ProductFormView extends StatelessWidget {
       onModelReady: (model) {
         // update the text in the controller
         productNameController.text = edittingProduct?.productName ?? '';
+        brandController.text = edittingProduct?.brand ?? '';
+        amazonURLController.text = edittingProduct?.amazonURL ?? '';
+        photoURLController.text = edittingProduct?.photoURL ?? '';
+        descriptionController.text = edittingProduct?.description ?? '';
+        featuresController.text = edittingProduct?.features ?? '';
 
         model.setEdittingPost(edittingProduct);
       },
       builder: (context, model, child) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Create an Product',
-          ),
-        ),
-        /* floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           child: !model.busy
               ? Icon(Icons.add)
               : CircularProgressIndicator(
@@ -37,15 +43,74 @@ class ProductFormView extends StatelessWidget {
           onPressed: () {
             if (!model.busy) {
               model.addProduct(
-                productName: productNameController.text,
-                price: double.parse(price),
+                product: Product(
+                  productName: productNameController.text,
+                  brand: brandController.text,
+                  amazonURL: amazonURLController.text,
+                  photoURL: photoURLController.text,
+                  description: descriptionController.text,
+                  features: featuresController.text,
+                  price: double.parse('2'),
+                  deal: '0',
+                  stock: '0,',
+                ),
               );
             }
           },
           backgroundColor:
-              !model.busy ? Theme.of(context).primaryColor : Colors.grey[200],
-        ), */
-        body: HorizontalStepperBody(),
+              !model.busy ? Theme.of(context).primaryColor : Colors.grey[600],
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: ListView(
+            children: <Widget>[
+              verticalSpace(40),
+              Text(
+                'Create Product',
+                style: TextStyle(fontSize: 26),
+              ),
+              verticalSpaceMedium,
+              InputField(
+                placeholder: 'Product Name',
+                controller: productNameController,
+              ),
+              InputField(
+                placeholder: 'Brand',
+                controller: brandController,
+              ),
+              InputField(
+                placeholder: 'Amazon URL',
+                controller: amazonURLController,
+              ),
+              InputField(
+                placeholder: 'Photo URL',
+                controller: photoURLController,
+              ),
+              InputField(
+                placeholder: 'Description',
+                controller: descriptionController,
+              ),
+              InputField(
+                placeholder: 'Features',
+                controller: featuresController,
+              ),
+              verticalSpaceMedium,
+              Text('Post Image'),
+              verticalSpaceSmall,
+              Container(
+                height: 250,
+                decoration: BoxDecoration(
+                    color: Colors.grey[100],
+                    borderRadius: BorderRadius.circular(10)),
+                alignment: Alignment.center,
+                child: Text(
+                  'Tap to add product image',
+                  style: TextStyle(color: Colors.grey[400]),
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -15,6 +15,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -73,7 +74,6 @@ class ProductItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 4),
                 // TODO: display price with -10%
                 Text(
                   '\$ ${product.price}',
