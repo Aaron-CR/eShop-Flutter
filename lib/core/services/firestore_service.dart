@@ -15,6 +15,12 @@ class FirestoreService {
   final StreamController<List<Product>> _productsController =
       StreamController<List<Product>>.broadcast();
 
+  final StreamController<List<Product>> _myProductsController =
+      StreamController<List<Product>>.broadcast();
+
+  final StreamController<List<Product>> _dealsController =
+      StreamController<List<Product>>.broadcast();
+
   Future createUser(User user) async {
     try {
       await _usersCollectionReference.document(user.uid).setData(user.toJson());
@@ -67,7 +73,7 @@ class FirestoreService {
     }
   }
 
-  Stream listenToProductsRealTime() {
+  Stream listenToProducts() {
     // Register the handler for when the products data changes
     _productsCollectionReference.snapshots().listen((productsSnapshot) {
       if (productsSnapshot.documents.isNotEmpty) {
@@ -84,7 +90,48 @@ class FirestoreService {
     return _productsController.stream;
   }
 
-  Future deleteProduct(String documentId) async {
+  /// Used in Product List View
+  /// return a list of products with a matching userId
+  Stream listenToMyProducts(userId) {
+    // Register the handler for when the products data changes
+    _productsCollectionReference.snapshots().listen((productsSnapshot) {
+      if (productsSnapshot.documents.isNotEmpty) {
+        var myProducts = productsSnapshot.documents
+            .map((snapshot) =>
+                Product.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.userId == userId)
+            .toList();
+
+        // Add the products onto the controller
+        _myProductsController.add(myProducts);
+      }
+    });
+
+    return _myProductsController.stream;
+  }
+
+  /// Used in Deals View
+  /// return a list of products with a deal
+  Stream listenToDeals() {
+    // Register the handler for when the products data changes
+    _productsCollectionReference.snapshots().listen((productsSnapshot) {
+      if (productsSnapshot.documents.isNotEmpty) {
+        var deals = productsSnapshot.documents
+            .map((snapshot) =>
+                Product.fromMap(snapshot.data, snapshot.documentID))
+            .where((mappedItem) => mappedItem.deal == '1')
+            .toList();
+
+        // Add the products onto the controller
+        _dealsController.add(deals);
+      }
+    });
+
+    return _dealsController.stream;
+  }
+
+  /// Deletes the document referred to by this [documentId]
+  Future<void> deleteProduct(String documentId) async {
     await _productsCollectionReference.document(documentId).delete();
   }
 

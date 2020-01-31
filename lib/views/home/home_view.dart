@@ -1,6 +1,7 @@
 import 'package:eshop/core/locator.dart';
 import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/shared/ui_helpers.dart';
+import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -36,11 +37,11 @@ class HomeView extends StatelessWidget {
                         _navigationService.popAndNavigateTo(AccountRoute);
                       },
                       accountName: Text(
-                        'User Name',
+                        model.currentUser.displayName,
                         style: TextStyle(color: Colors.black),
                       ),
                       accountEmail: Text(
-                        'User Email',
+                        model.currentUser.email,
                         style: TextStyle(color: Colors.black),
                       ),
                       decoration: BoxDecoration(color: Colors.grey[50]),
@@ -50,7 +51,7 @@ class HomeView extends StatelessWidget {
                         },
                         child: CircleAvatar(
                           backgroundImage:
-                              AssetImage('assets/images/user/user-thumb.jpg'),
+                              NetworkImage(model.currentUser.photoURL),
                           backgroundColor: Colors.grey[50],
                         ),
                       ),
@@ -87,10 +88,6 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          child: !model.busy ? Icon(Icons.add) : CircularProgressIndicator(),
-          onPressed: model.navigateToCreateView,
-        ),
         body: Container(
           child: model.products != null
               ? StaggeredGridView.countBuilder(
@@ -99,16 +96,17 @@ class HomeView extends StatelessWidget {
                   crossAxisCount: isPortrait(context) ? 2 : 3,
                   itemCount: model.products.length,
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => model.editPost(index),
+                    // TODO: move onTap() propierty to ProductListView
+                    //onTap: () => model.editPost(index),
                     child: ProductItem(
                       product: model.products[index],
-                      onDeleteItem: () => model.deleteProduct(index),
+                      //onDeleteItem: () => model.deleteProduct(index),
                     ),
                   ),
                 )
               : Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(kMainColor),
+                    valueColor: AlwaysStoppedAnimation(colorScheme.primary),
                   ),
                 ),
         ),
