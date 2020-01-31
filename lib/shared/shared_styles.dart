@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// TODO: Reorganize and refacotr styles
+// TODO: Reorganize and refactor styles
 
 // Box Decorations
 
@@ -21,6 +21,7 @@ BoxDecoration kBoxDecorationStyle = BoxDecoration(
     ),
   ],
 );
+
 // Field Variables
 
 const double fieldHeight = 50;
@@ -32,6 +33,7 @@ const EdgeInsets largeFieldPadding =
     const EdgeInsets.symmetric(horizontal: 15, vertical: 15);
 
 // Text Variables
+
 const TextStyle buttonTitleTextStyle = TextStyle(
   color: Colors.white,
   letterSpacing: 1.1,

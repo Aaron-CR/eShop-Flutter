@@ -1,5 +1,5 @@
+import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:eshop/shared/app_colors.dart';
 
 class TextLink extends StatelessWidget {
   final String text;
@@ -24,7 +24,7 @@ class TextLink extends StatelessWidget {
             TextSpan(
               text: 'Sign Up',
               style: TextStyle(
-                color: kMainColor,
+                color: colorScheme.primary,
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),

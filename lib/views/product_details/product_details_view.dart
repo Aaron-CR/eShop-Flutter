@@ -1,8 +1,7 @@
+import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:eshop/core/models/product_models.dart';
-import 'package:eshop/shared/app_colors.dart';
-import 'package:eshop/widgets/rounded_button.dart';
 import 'package:eshop/widgets/stock_label.dart';
 
 class ProductDetailsView extends StatefulWidget {
@@ -109,9 +108,12 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
       children: <Widget>[
         Flexible(
           flex: 3,
-          child: RoundedButton(
-            onPressed: () => _launchURL(widget.product.amazonURL),
-            text: 'Buy',
+          child: Container(
+            width: double.infinity,
+            child: RaisedButton(
+              onPressed: () => _launchURL(widget.product.amazonURL),
+              child: Text('Buy'),
+            ),
           ),
         ),
         Flexible(
@@ -124,7 +126,7 @@ class _ProductDetailsViewState extends State<ProductDetailsView> {
             },
             child: Icon(
               Icons.favorite,
-              color: isFavourite ? kMainColor : Colors.grey,
+              color: isFavourite ? colorScheme.primary : Colors.grey,
             ),
             shape: CircleBorder(),
             elevation: 2.0,

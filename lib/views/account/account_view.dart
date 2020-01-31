@@ -1,4 +1,3 @@
-import 'package:eshop/shared/shared_styles.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
 import 'package:eshop/views/account/account_view_model.dart';
@@ -21,7 +20,6 @@ class AccountView extends StatelessWidget {
         ),
         body: Container(
           child: Container(
-            color: Colors.red,
             height: screenHeightFraction(context, dividedBy: 2.5),
             child: Stack(
               children: <Widget>[

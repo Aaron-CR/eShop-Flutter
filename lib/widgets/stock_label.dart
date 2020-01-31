@@ -13,6 +13,7 @@ class StockLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
+        // Change icon on OUT STOCK
         Icon(
           Icons.check_box,
           color: color,

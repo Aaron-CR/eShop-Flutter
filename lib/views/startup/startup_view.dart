@@ -1,7 +1,7 @@
+import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:eshop/views/startup/startup_view_model.dart';
-import 'package:eshop/shared/app_colors.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 
 class StartUpView extends StatelessWidget {
@@ -14,7 +14,7 @@ class StartUpView extends StatelessWidget {
         viewModel: StartUpViewModel(),
         onModelReady: (model) => model.handleStartUpLogic(),
         builder: (context, model, child) => Scaffold(
-          backgroundColor: kMainColor,
+          backgroundColor: colorScheme.primary,
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

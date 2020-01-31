@@ -1,11 +1,9 @@
-import 'package:eshop/shared/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // TODO: Reorganize and refactor Theme
-// TODO: add final to all fields
 
-TextTheme textTheme = TextTheme(
+final TextTheme textTheme = TextTheme(
   display4: GoogleFonts.openSans(
     fontSize: 98,
   ),
@@ -50,7 +48,7 @@ TextTheme textTheme = TextTheme(
   displayColor: Colors.black54,
 );
 
-ColorScheme colorScheme = ColorScheme(
+final ColorScheme colorScheme = ColorScheme(
   primary: const Color(0xFFE84444),
   primaryVariant: const Color(0xFFAF001C),
   secondary: const Color(0xFFFFCA28),
@@ -66,7 +64,7 @@ ColorScheme colorScheme = ColorScheme(
   brightness: Brightness.light,
 );
 
-ThemeData themeData = ThemeData(
+final ThemeData themeData = ThemeData(
   colorScheme: colorScheme,
   primaryColor: colorScheme.primary,
   primarySwatch: Colors.red,

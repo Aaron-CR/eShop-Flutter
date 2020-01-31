@@ -36,9 +36,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
       );
     case ProductDetailsRoute:
+      var product = settings.arguments as Product;
       return _getPageRoute(
         routeName: settings.name,
-        viewToShow: ProductDetailsView(),
+        viewToShow: ProductDetailsView(
+          product: product,
+        ),
       );
     case AccountRoute:
       return _getPageRoute(

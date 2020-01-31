@@ -1,5 +1,5 @@
+import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:eshop/shared/app_colors.dart';
 import 'package:eshop/shared/shared_styles.dart';
 
 /// A button that shows a busy indicator in place of title
@@ -31,7 +31,7 @@ class _BusyButtonState extends State<BusyButton> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        color: kMainColor,
+        color: colorScheme.primary,
         child: !widget.busy
             ? Text(
                 widget.title,

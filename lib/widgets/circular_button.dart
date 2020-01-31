@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 class CircularButton extends StatelessWidget {
-  const CircularButton(
-      {Key key, @required this.onPressed, @required this.image, this.color})
-      : super(key: key);
+  const CircularButton({
+    Key key,
+    @required this.onPressed,
+    @required this.image,
+    this.color = Colors.white,
+  }) : super(key: key);
 
   final Function onPressed;
   final String image;
@@ -19,7 +22,7 @@ class CircularButton extends StatelessWidget {
       ),
       shape: CircleBorder(),
       elevation: 2.0,
-      fillColor: color == null ? Colors.white : color,
+      fillColor: color,
       padding: EdgeInsets.all(16.0),
     );
   }

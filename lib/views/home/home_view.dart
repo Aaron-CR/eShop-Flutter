@@ -1,16 +1,10 @@
-import 'package:eshop/core/locator.dart';
-import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:eshop/views/home/home_view_model.dart';
-import 'package:eshop/shared/app_colors.dart';
 import 'package:eshop/widgets/product_item.dart';
-import 'package:eshop/constants/route_names.dart';
-
-final NavigationService _navigationService = locator<NavigationService>();
 
 class HomeView extends StatelessWidget {
   const HomeView({Key key}) : super(key: key);
@@ -33,9 +27,7 @@ class HomeView extends StatelessWidget {
                 child: ListView(
                   children: <Widget>[
                     UserAccountsDrawerHeader(
-                      onDetailsPressed: () {
-                        _navigationService.popAndNavigateTo(AccountRoute);
-                      },
+                      onDetailsPressed: () => model.navigateToAccountView(),
                       accountName: Text(
                         model.currentUser.displayName,
                         style: TextStyle(color: Colors.black),
@@ -46,9 +38,7 @@ class HomeView extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(color: Colors.grey[50]),
                       currentAccountPicture: GestureDetector(
-                        onTap: () {
-                          _navigationService.popAndNavigateTo(AccountRoute);
-                        },
+                        onTap: () => model.navigateToAccountView(),
                         child: CircleAvatar(
                           backgroundImage:
                               NetworkImage(model.currentUser.photoURL),
@@ -59,23 +49,17 @@ class HomeView extends StatelessWidget {
                     ListTile(
                       title: Text('Deals'),
                       leading: Icon(Icons.local_offer),
-                      onTap: () {
-                        _navigationService.popAndNavigateTo(DealsRoute);
-                      },
+                      onTap: () => model.navigateToDealsView(),
                     ),
                     ListTile(
                       title: Text('My account'),
                       leading: Icon(Icons.account_circle),
-                      onTap: () {
-                        _navigationService.popAndNavigateTo(AccountRoute);
-                      },
+                      onTap: () => model.navigateToAccountView(),
                     ),
                     ListTile(
                       title: Text('Product List'),
                       leading: Icon(Icons.list),
-                      onTap: () {
-                        _navigationService.popAndNavigateTo(ProductListRoute);
-                      },
+                      onTap: () => model.navigateToProductListView(),
                     ),
                   ],
                 ),
@@ -83,7 +67,10 @@ class HomeView extends StatelessWidget {
               ListTile(
                 title: Text('Logout'),
                 leading: Icon(Icons.power_settings_new),
-                onTap: () {},
+                onTap: () {
+                  // TODO: create logout method
+                  //model.logout();
+                },
               ),
             ],
           ),
@@ -96,12 +83,8 @@ class HomeView extends StatelessWidget {
                   crossAxisCount: isPortrait(context) ? 2 : 3,
                   itemCount: model.products.length,
                   itemBuilder: (context, index) => GestureDetector(
-                    // TODO: move onTap() propierty to ProductListView
-                    //onTap: () => model.editPost(index),
-                    child: ProductItem(
-                      product: model.products[index],
-                      //onDeleteItem: () => model.deleteProduct(index),
-                    ),
+                    onTap: () => model.navigateToProductDetailsView(index),
+                    child: ProductItem(product: model.products[index]),
                   ),
                 )
               : Center(
@@ -114,49 +97,3 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
-/// Last working code
-/* 
-model.products != null
-              ? StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.all(6.0),
-                  staggeredTileBuilder: (_) => StaggeredTile.fit(2),
-                  crossAxisCount: 4,
-                  itemCount: model.products.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => model.editPost(index),
-                    child: ProductItem(
-                      product: model.products[index],
-                      onDeleteItem: () => model.deleteProduct(index),
-                    ),
-                  ),
-                )
-              : Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(kMainColor),
-                  ),
-                ),
- */
-/* 
-StreamBuilder(
-            stream: model.listenToProductsRealTime(),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.all(6.0),
-                  crossAxisCount: 4,
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (buildContext, index) =>
-                      ProductItem(product: snapshot.data[index]),
-                  staggeredTileBuilder: (_) => StaggeredTile.fit(2),
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(kMainColor),
-                  ),
-                );
-              }
-            },
-          ),
- */

@@ -333,6 +333,7 @@ class _HorizontalStepperBodyState extends State<HorizontalStepperBody> {
           child: NotificationListener<OverscrollIndicatorNotification>(
             onNotification: (overscroll) {
               overscroll.disallowGlow();
+              //return true;
             },
             child: ListView(
               physics: ClampingScrollPhysics(),

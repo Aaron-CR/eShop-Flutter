@@ -1,11 +1,8 @@
 import 'package:eshop/views/product_form/horizontaltest.dart';
-import 'package:eshop/views/product_form/test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:eshop/core/models/product_models.dart';
 import 'package:eshop/views/product_form/product_form_view_model.dart';
-import 'package:eshop/shared/ui_helpers.dart';
-import 'package:eshop/widgets/input_field.dart';
 
 class ProductFormView extends StatelessWidget {
   final productNameController = TextEditingController();

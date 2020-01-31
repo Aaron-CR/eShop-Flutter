@@ -1,6 +1,4 @@
-import 'package:eshop/views/product_form/product_form_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:eshop/core/locator.dart';
 import 'package:eshop/core/managers/dialog_manager.dart';
 import 'package:eshop/core/services/navigation_service.dart';
@@ -12,13 +10,14 @@ import 'package:eshop/router.dart';
 void main() {
   // Register all the models and services before the app starts
   setupLocator();
-
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    // Remove the darker status bar color
     /* SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       systemNavigationBarColor: Colors.transparent,

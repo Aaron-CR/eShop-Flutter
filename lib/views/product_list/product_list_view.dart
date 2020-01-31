@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:eshop/constants/route_names.dart';
 import 'package:eshop/core/locator.dart';
 import 'package:eshop/core/models/product_models.dart';
 import 'package:eshop/core/services/navigation_service.dart';
@@ -8,7 +6,6 @@ import 'package:eshop/theme/theme.dart';
 import 'package:eshop/views/product_list/product_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 final NavigationService _navigationService = locator<NavigationService>();
 
@@ -35,8 +32,9 @@ class ProductListView extends StatelessWidget {
               ? ListView.builder(
                   itemExtent: 80.0,
                   itemCount: model.myProducts.length,
-                  itemBuilder: (context, index) =>
-                      _buildListItem(context, model.myProducts[index]),
+                  itemBuilder: (context, index) => GestureDetector(
+                      //onTap: () => model.editPost(index),
+                      child: _buildListItem(context, model.myProducts[index])),
                 )
               : Center(
                   child: Column(
