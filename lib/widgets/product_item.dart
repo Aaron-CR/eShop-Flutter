@@ -31,7 +31,6 @@ class ProductItem extends StatelessWidget {
                   ),
                 ),
               ),
-              // TODO: add discount tag and fav icon
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Row(

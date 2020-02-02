@@ -26,6 +26,13 @@ class ProductListViewModel extends BaseViewModel {
     setBusy(false);
   }
 
+  Future<void> onRefresh() async {
+    setBusy(true);
+    _myProducts.clear();
+    listenToMyProducts();
+    setBusy(false);
+  }
+
   /* Stream listenToMyProducts() {
     return _firestoreService.listenToMyProducts(currentUser.uid);
   } */
