@@ -18,15 +18,6 @@ class HomeView extends StatelessWidget {
         appBar: AppBar(
           title: Text('eShop'),
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(
-                    context: context, delegate: DataSearch(model.products));
-              },
-            ),
-          ],
         ),
         drawer: Drawer(
           child: Column(

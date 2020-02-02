@@ -1,8 +1,10 @@
 import 'package:eshop/core/models/product_models.dart';
+import 'package:eshop/shared/data_search.dart';
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
 import 'package:eshop/views/product_list/product_list_view_model.dart';
 import 'package:eshop/widgets/busy_overlay.dart';
+import 'package:eshop/widgets/product_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,6 +24,16 @@ class ProductListView extends StatelessWidget {
             title: Text(
               'Product List',
             ),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: DataSearch(model.myProducts, model));
+                },
+              ),
+            ],
           ),
           floatingActionButton: FloatingActionButton(
             child: !model.busy ? Icon(Icons.add) : CircularProgressIndicator(),
@@ -35,10 +47,10 @@ class ProductListView extends StatelessWidget {
                       padding: EdgeInsets.all(12.0),
                       itemCount: model.myProducts.length,
                       itemBuilder: (context, index) => GestureDetector(
-                          onTap: () =>
-                              model.navigateToProductDetailsView(index),
-                          child: _buildListItem(
-                              context, model.myProducts[index], model, index)),
+                        onTap: () => model.navigateToProductDetailsView(index),
+                        child: ProductListItem(
+                            model.myProducts[index], model, index),
+                      ),
                     )
                   : Center(
                       child: Column(
@@ -68,8 +80,8 @@ class ProductListView extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildListItem(BuildContext context, Product product,
+/* 
+  Widget buildListItem(BuildContext context, Product product,
       ProductListViewModel model, int index) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 6.0),
@@ -142,4 +154,6 @@ class ProductListView extends StatelessWidget {
       ),
     );
   }
+}
+ */
 }

@@ -1,7 +1,5 @@
-import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
 import 'package:eshop/views/account/account_view_model.dart';
-import 'package:eshop/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
 
