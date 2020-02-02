@@ -95,7 +95,7 @@ class ProductFormView extends StatelessWidget {
                 controller: featuresController,
               ),
               verticalSpaceMedium,
-              Text('Post Image'),
+              Text('Product preview'),
               verticalSpaceSmall,
               Container(
                 height: 250,
@@ -104,7 +104,7 @@ class ProductFormView extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 alignment: Alignment.center,
                 child: Text(
-                  'Tap to add product image',
+                  'Product preview',
                   style: TextStyle(color: Colors.grey[400]),
                 ),
               )

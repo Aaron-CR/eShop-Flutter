@@ -16,7 +16,7 @@ class ProductListViewModel extends BaseViewModel {
 
   void listenToMyProducts() {
     setBusy(true);
-    _firestoreService.listenToMyProducts(currentUser.uid).listen((productData) {
+    _firestoreService.listenToMyProducts(currentUser).listen((productData) {
       List<Product> updatedProducts = productData;
       if (updatedProducts != null && updatedProducts.length > 0) {
         _myProducts = updatedProducts;
@@ -30,12 +30,17 @@ class ProductListViewModel extends BaseViewModel {
     return _firestoreService.listenToMyProducts(currentUser.uid);
   } */
 
-  Future navigateToCreateView() async {
-    await _navigationService.navigateTo(CreateProductViewRoute);
+  Future navigateToProductFormView() async {
+    await _navigationService.navigateTo(ProductFormViewRoute);
   }
 
-  void editPost(int index) {
-    _navigationService.navigateTo(CreateProductViewRoute,
+  Future navigateToProductDetailsView(int index) async {
+    await _navigationService.navigateTo(ProductDetailsViewRoute,
+        arguments: _myProducts[index]);
+  }
+
+  void editProduct(int index) {
+    _navigationService.navigateTo(ProductFormViewRoute,
         arguments: _myProducts[index]);
   }
 

@@ -42,7 +42,7 @@ class HomeView extends StatelessWidget {
                         child: CircleAvatar(
                           backgroundImage:
                               NetworkImage(model.currentUser.photoURL),
-                          backgroundColor: Colors.grey[50],
+                          backgroundColor: Colors.grey[300],
                         ),
                       ),
                     ),
@@ -61,16 +61,18 @@ class HomeView extends StatelessWidget {
                       leading: Icon(Icons.list),
                       onTap: () => model.navigateToProductListView(),
                     ),
+                    ListTile(
+                      title: Text('Experimental'),
+                      leading: Icon(Icons.build),
+                      onTap: () => model.navigateToExperimentalProductFormView(),
+                    ),
                   ],
                 ),
               ),
               ListTile(
                 title: Text('Logout'),
                 leading: Icon(Icons.power_settings_new),
-                onTap: () {
-                  // TODO: create logout method
-                  //model.logout();
-                },
+                onTap: () => model.signOut(),
               ),
             ],
           ),

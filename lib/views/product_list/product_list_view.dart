@@ -6,6 +6,7 @@ import 'package:eshop/theme/theme.dart';
 import 'package:eshop/views/product_list/product_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/provider_architecture.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 final NavigationService _navigationService = locator<NavigationService>();
 
@@ -25,16 +26,18 @@ class ProductListView extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           child: !model.busy ? Icon(Icons.add) : CircularProgressIndicator(),
-          onPressed: model.navigateToCreateView,
+          onPressed: model.navigateToProductFormView,
         ),
         body: Container(
           child: model.myProducts != null
               ? ListView.builder(
-                  itemExtent: 80.0,
+                  padding: EdgeInsets.all(12.0),
+                  itemExtent: 100.0,
                   itemCount: model.myProducts.length,
                   itemBuilder: (context, index) => GestureDetector(
-                      //onTap: () => model.editPost(index),
-                      child: _buildListItem(context, model.myProducts[index])),
+                      onTap: () => model.navigateToProductDetailsView(index),
+                      child: _buildListItem(
+                          context, model.myProducts[index], model, index)),
                 )
               : Center(
                   child: Column(
@@ -63,46 +66,55 @@ class ProductListView extends StatelessWidget {
     );
   }
 
-  Widget _buildListItem(BuildContext context, Product product) {
-    return ListTile(
-      leading: CircleAvatar(
-        backgroundImage: NetworkImage(product.photoURL),
-        backgroundColor: Colors.grey[50],
+  Widget _buildListItem(BuildContext context, Product product,
+      ProductListViewModel model, int index) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 6.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: Container(
+            color: Colors.white,
+            height: 100.0,
+            child: Center(
+              child: ListTile(
+                leading: ClipOval(
+                  child: FadeInImage(
+                    width: 52.0,
+                    height: 52.0,
+                    fit: BoxFit.contain,
+                    placeholder:
+                        AssetImage("assets/images/product-placeholder.png"),
+                    image: NetworkImage(product.photoURL),
+                  ),
+                ),
+                title: Text(product.productName),
+                subtitle: Text('\$ ${product.price}'),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            IconSlideAction(
+              caption: 'Edit',
+              color: Colors.grey[300].withOpacity(0.7),
+              foregroundColor: Colors.green[600],
+              icon: Icons.edit,
+              onTap: () => model.editProduct(index),
+            ),
+          ],
+          secondaryActions: <Widget>[
+            IconSlideAction(
+              caption: 'Delete',
+              color: Colors.grey[300].withOpacity(0.7),
+              foregroundColor: colorScheme.primary,
+              icon: Icons.delete,
+              onTap: () => model.deleteProduct(index),
+            ),
+          ],
+        ),
       ),
-      title: Text(product.productName),
-      subtitle: Text(product.price.toString()),
     );
   }
 }
-
-/* 
-return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      '☹️',
-                      style: textTheme.display3,
-                    ),
-                    Text(
-                      'No Products',
-                      style: textTheme.headline,
-                    ),
-                    verticalSpaceSmall,
-                    Text(
-                      'Please tap the + to add your first product.',
-                      style: textTheme.caption,
-                      textAlign: TextAlign.center,
-                    ),
-                    verticalSpaceMedium,
-                  ],
-                ),
-              );
-            return ListView.builder(
-              itemExtent: 80.0,
-              itemCount: products.length,
-              itemBuilder: (context, index) =>
-                  _buildListItem(context, products[index]),
-            );
-
- */

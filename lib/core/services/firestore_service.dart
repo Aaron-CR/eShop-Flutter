@@ -92,14 +92,15 @@ class FirestoreService {
 
   /// Used in Product List View
   /// return a list of products with a matching userId
-  Stream listenToMyProducts(userId) {
+  Stream listenToMyProducts(User user) {
     // Register the handler for when the products data changes
     _productsCollectionReference.snapshots().listen((productsSnapshot) {
       if (productsSnapshot.documents.isNotEmpty) {
         var myProducts = productsSnapshot.documents
             .map((snapshot) =>
                 Product.fromMap(snapshot.data, snapshot.documentID))
-            .where((mappedItem) => mappedItem.userId == userId)
+            .where((mappedItem) =>
+                mappedItem.userId == user.uid || user.userRole == 'Admin')
             .toList();
 
         // Add the products onto the controller
