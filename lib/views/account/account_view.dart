@@ -18,51 +18,24 @@ class AccountView extends StatelessWidget {
             'My Account',
           ),
         ),
-        body: Container(
-          child: Container(
-            height: screenHeightFraction(context, dividedBy: 2.5),
-            child: Stack(
-              children: <Widget>[
-                Background(),
-                Padding(
-                  padding: EdgeInsets.all(18.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      verticalSpaceLarge,
-                      CircleAvatar(
-                        radius: 35.0,
-                        backgroundImage:
-                            NetworkImage(model.currentUser.photoURL),
-                        backgroundColor: Colors.grey[50],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            model.currentUser.displayName,
-                            style: textTheme.display1.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          verticalSpaceTiny,
-                          Text(
-                            model.currentUser.email,
-                            style: textTheme.subtitle.copyWith(
-                              color: Colors.white70,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
+        body: ListView(
+          children: <Widget>[
+            ListTile(
+              contentPadding: EdgeInsets.all(12.0),
+              leading: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(model.currentUser.photoURL),
+                  backgroundColor: Colors.grey[300],
                 ),
-              ],
+              ),
+              title: Text(
+                model.currentUser.displayName,
+                style: textTheme.title,
+              ),
+              subtitle: Text(model.currentUser.email),
             ),
-          ),
+          ],
         ),
       ),
     );

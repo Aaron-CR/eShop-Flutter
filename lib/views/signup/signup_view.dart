@@ -80,6 +80,7 @@ class SignUpView extends StatelessWidget {
                       title: 'Register',
                       busy: model.busy,
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         if (_formKey.currentState.validate()) {
                           model.signUpWithEmail(
                             email: emailController.text.trim(),

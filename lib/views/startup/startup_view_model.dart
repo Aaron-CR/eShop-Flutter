@@ -1,8 +1,9 @@
-import 'package:eshop/constants/route_names.dart';
 import 'package:eshop/core/locator.dart';
 import 'package:eshop/core/services/authentication_service.dart';
 import 'package:eshop/core/services/navigation_service.dart';
 import 'package:eshop/core/base/base_view_model.dart';
+import 'package:eshop/views/home/home_view.dart';
+import 'package:eshop/views/signin/signin_view.dart';
 
 class StartUpViewModel extends BaseViewModel {
   final AuthenticationService _authenticationService =
@@ -13,9 +14,9 @@ class StartUpViewModel extends BaseViewModel {
     var hasLoggedInUser = await _authenticationService.isUserLoggedIn();
 
     if (hasLoggedInUser) {
-      _navigationService.replaceTo(HomeViewRoute);
+      _navigationService.replaceWithoutAnimationTo(HomeView());
     } else {
-      _navigationService.replaceTo(SignInViewRoute);
+      _navigationService.replaceWithoutAnimationTo(SignInView());
     }
   }
 }

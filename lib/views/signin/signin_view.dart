@@ -70,6 +70,7 @@ class SignInView extends StatelessWidget {
                       title: 'Login',
                       busy: model.busy,
                       onPressed: () {
+                        FocusScope.of(context).unfocus();
                         if (_formKey.currentState.validate()) {
                           model.signInWithEmail(
                             email: emailController.text.trim(),
@@ -94,6 +95,7 @@ class SignInView extends StatelessWidget {
                               // Facebook
                               CircularButton(
                                 onPressed: () {
+                                  FocusScope.of(context).unfocus();
                                   model.signInWithFacebook();
                                 },
                                 image: 'assets/images/facebook-logo.png',
@@ -103,6 +105,7 @@ class SignInView extends StatelessWidget {
                               // Google
                               CircularButton(
                                 onPressed: () {
+                                  FocusScope.of(context).unfocus();
                                   model.signInWithGoogle();
                                 },
                                 image: 'assets/images/google-logo.png',

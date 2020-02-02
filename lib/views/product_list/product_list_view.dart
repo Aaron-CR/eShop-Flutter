@@ -100,15 +100,12 @@ class ProductListView extends StatelessWidget {
                 trailing: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    product.deal == '1'
-                        ? Icon(
-                            Icons.local_offer,
-                            color: colorScheme.primary,
-                          )
-                        : Icon(
-                            Icons.local_offer,
-                            color: Colors.grey[200],
-                          ),
+                    Icon(
+                      Icons.local_offer,
+                      color: product.deal == '1'
+                          ? colorScheme.primary
+                          : Colors.grey[200],
+                    ),
                     product.stock == '1'
                         ? Icon(
                             Icons.check_box,
