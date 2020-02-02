@@ -15,6 +15,10 @@ class HomeViewModel extends BaseViewModel {
   List<Product> _products;
   List<Product> get products => _products;
 
+  String header = 'Hello, world!';
+  String subtitle =
+      'This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content.';
+
   void listenToProducts() {
     setBusy(true);
     _firestoreService.listenToProducts().listen((productData) {

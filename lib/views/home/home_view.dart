@@ -1,5 +1,6 @@
 import 'package:eshop/shared/ui_helpers.dart';
 import 'package:eshop/theme/theme.dart';
+import 'package:eshop/widgets/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_architecture/viewmodel_provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -78,23 +79,57 @@ class HomeView extends StatelessWidget {
             ],
           ),
         ),
-        body: Container(
-          child: model.products != null
-              ? StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.all(6.0),
-                  staggeredTileBuilder: (_) => StaggeredTile.fit(1),
-                  crossAxisCount: isPortrait(context) ? 2 : 3,
-                  itemCount: model.products.length,
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => model.navigateToProductDetailsView(index),
-                    child: ProductItem(product: model.products[index]),
+        body: ListView(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    model.header,
+                    style: textTheme.display1,
                   ),
-                )
-              : Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(colorScheme.primary),
+                  Text(
+                    model.subtitle,
+                    style: textTheme.subtitle,
                   ),
-                ),
+                  verticalSpaceMedium,
+                  RaisedButton(
+                    onPressed: () => model.navigateToDealsView(),
+                    child: Text('See Deals'),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Text(
+                'Product List',
+                style: textTheme.headline,
+              ),
+            ),
+            Container(
+              child: model.products != null
+                  ? StaggeredGridView.countBuilder(
+                      shrinkWrap: true,
+                      physics: ClampingScrollPhysics(),
+                      padding: EdgeInsets.all(6.0),
+                      staggeredTileBuilder: (_) => StaggeredTile.fit(1),
+                      crossAxisCount: isPortrait(context) ? 2 : 3,
+                      itemCount: model.products.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => model.navigateToProductDetailsView(index),
+                        child: ProductItem(product: model.products[index]),
+                      ),
+                    )
+                  : Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(colorScheme.primary),
+                      ),
+                    ),
+            ),
+          ],
         ),
       ),
     );

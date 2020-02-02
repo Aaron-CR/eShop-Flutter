@@ -20,7 +20,7 @@ class ProductListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.0),
           child: Slidable(
             actionPane: SlidableDrawerActionPane(),
-            actionExtentRatio: 0.16,
+            actionExtentRatio: 0.17,
             child: Container(
               color: Colors.white,
               child: Center(
@@ -31,8 +31,8 @@ class ProductListItem extends StatelessWidget {
                     child: Container(
                       color: Colors.white,
                       child: FadeInImage(
-                        width: 52.0,
-                        height: 52.0,
+                        width: 58.0,
+                        height: 58.0,
                         fit: BoxFit.contain,
                         placeholder:
                             AssetImage("assets/images/product-placeholder.png"),

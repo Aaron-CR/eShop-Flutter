@@ -26,28 +26,8 @@ class ProductListViewModel extends BaseViewModel {
     setBusy(false);
   }
 
-  Future<void> onRefresh() async {
-    setBusy(true);
-    _myProducts.clear();
-    listenToMyProducts();
-    setBusy(false);
-  }
-
-  /* Stream listenToMyProducts() {
-    return _firestoreService.listenToMyProducts(currentUser.uid);
-  } */
-
-  Future navigateToProductFormView() async {
-    await _navigationService.navigateTo(ProductFormViewRoute);
-  }
-
-  Future navigateToProductDetailsView(int index) async {
-    await _navigationService.navigateTo(ProductDetailsViewRoute,
-        arguments: _myProducts[index]);
-  }
-
-  void editProduct(int index) {
-    _navigationService.navigateTo(ProductFormViewRoute,
+  Future editProduct(int index) async {
+    await _navigationService.navigateTo(ProductFormViewRoute,
         arguments: _myProducts[index]);
   }
 
@@ -64,5 +44,21 @@ class ProductListViewModel extends BaseViewModel {
       await _firestoreService.deleteProduct(_myProducts[index].id);
       setBusy(false);
     }
+  }
+
+  Future<void> onRefresh() async {
+    setBusy(true);
+    _myProducts.clear();
+    listenToMyProducts();
+    setBusy(false);
+  }
+
+  Future navigateToProductFormView() async {
+    await _navigationService.navigateTo(ProductFormViewRoute);
+  }
+
+  Future navigateToProductDetailsView(int index) async {
+    await _navigationService.navigateTo(ProductDetailsViewRoute,
+        arguments: _myProducts[index]);
   }
 }
