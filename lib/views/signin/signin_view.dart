@@ -149,6 +149,3 @@ Widget forgotPasswordButton() {
     ),
   );
 }
-/* 
-
- */

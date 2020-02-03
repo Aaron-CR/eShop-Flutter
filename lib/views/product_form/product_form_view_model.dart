@@ -11,20 +11,20 @@ class ProductFormViewModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  Product _edittingProduct;
-  bool get _edditting => _edittingProduct != null;
+  Product edittingProduct;
+  bool get edditting => edittingProduct != null;
 
   Future addProduct({@required Product product}) async {
     setBusy(true);
 
     // TODO: add id on create a new product
     var result;
-    if (!_edditting) {
+    if (!edditting) {
       product.userId = currentUser.uid;
       result = await _firestoreService.addProduct(product);
     } else {
-      product.userId = _edittingProduct.userId;
-      product.id = _edittingProduct.id;
+      product.userId = edittingProduct.userId;
+      product.id = edittingProduct.id;
       result = await _firestoreService.updateProduct(product);
     }
     setBusy(false);
@@ -44,7 +44,7 @@ class ProductFormViewModel extends BaseViewModel {
     _navigationService.pop();
   }
 
-  void setEdittingPost(Product edittingProduct) {
+  /* void setEdittingPost(Product edittingProduct) {
     _edittingProduct = edittingProduct;
-  }
+  } */
 }
