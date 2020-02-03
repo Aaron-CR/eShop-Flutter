@@ -36,7 +36,8 @@ class ProductItem extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    product.deal == '1'
+                    // TODO: search with git '1'
+                    product.deal == true
                         ? Container(
                             height: 24.0,
                             child: Padding(

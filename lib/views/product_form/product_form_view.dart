@@ -42,8 +42,8 @@ class _ProductFormViewState extends State<ProductFormView> {
                     description: widget.edittingProduct.description,
                     features: widget.edittingProduct.features,
                     price: double.parse('2'),
-                    deal: '0',
-                    stock: '0,',
+                    deal: widget.edittingProduct.deal,
+                    stock: widget.edittingProduct.stock,
                   ),
                 );
               }
@@ -135,17 +135,16 @@ class _ProductFormViewState extends State<ProductFormView> {
                           () => widget.edittingProduct.features = value),
                     ),
                     SwitchListTile(
-                        title: const Text('Offer of -10%'),
-                        value: false,
+                        title: Text('Offer of -10%'),
+                        value: widget.edittingProduct?.deal ?? false,
                         onChanged: (value) {
-                          //setState(() => widget.edittingProduct.deal = value)},
+                          setState(() => widget.edittingProduct.deal = value);
                         }),
                     SwitchListTile(
-                        title: const Text('Is the product in stock?'),
-                        //value: stringToBoolean(widget.edittingProduct.stock),
-                        value: false,
-                        onChanged: (val) {
-                          // setState(() => _user.newsletter = val)}
+                        title: Text('Is the product in stock?'),
+                        value: widget.edittingProduct?.stock ?? false,
+                        onChanged: (value) {
+                          setState(() => widget.edittingProduct.stock = value);
                         }),
                     Text('Product preview'),
                     verticalSpaceSmall,

@@ -1,14 +1,14 @@
 class Product {
   String amazonURL;
   String brand;
-  String deal;
+  bool deal;
   String description;
   String features;
   String id;
   String photoURL;
   double price;
   String productName;
-  String stock;
+  bool stock;
   String userId;
 
   Product(

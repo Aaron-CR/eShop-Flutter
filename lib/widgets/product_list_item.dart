@@ -45,11 +45,11 @@ class ProductListItem extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         Icons.local_offer,
-                        color: product.deal == '1'
+                        color: product.deal
                             ? colorScheme.primary
                             : Colors.grey[200],
                       ),
-                      product.stock == '1'
+                      product.stock
                           ? Icon(
                               Icons.check_box,
                               color: Color(0xFF28A745),

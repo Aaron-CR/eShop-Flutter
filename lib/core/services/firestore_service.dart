@@ -120,7 +120,7 @@ class FirestoreService {
         var deals = productsSnapshot.documents
             .map((snapshot) =>
                 Product.fromMap(snapshot.data, snapshot.documentID))
-            .where((mappedItem) => mappedItem.deal == '1')
+            .where((mappedItem) => mappedItem.deal)
             .toList();
 
         // Add the products onto the controller
