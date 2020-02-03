@@ -27,7 +27,7 @@ class ProductListViewModel extends BaseViewModel {
   }
 
   Future editProduct(int index) async {
-    await _navigationService.navigateTo(ProductFormViewRoute,
+    await _navigationService.pushNamed(ProductFormViewRoute,
         arguments: _myProducts[index]);
   }
 
@@ -54,11 +54,11 @@ class ProductListViewModel extends BaseViewModel {
   }
 
   Future navigateToProductFormView() async {
-    await _navigationService.navigateTo(ProductFormViewRoute);
+    await _navigationService.pushNamed(ProductFormViewRoute);
   }
 
   Future navigateToProductDetailsView(int index) async {
-    await _navigationService.navigateTo(ProductDetailsViewRoute,
+    await _navigationService.pushNamed(ProductDetailsViewRoute,
         arguments: _myProducts[index]);
   }
 }

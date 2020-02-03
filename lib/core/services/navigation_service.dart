@@ -9,17 +9,17 @@ class NavigationService {
     return _navigationKey.currentState.pop();
   }
 
-  Future<dynamic> navigateTo(String routeName, {dynamic arguments}) {
+  Future<dynamic> pushNamed(String routeName, {dynamic arguments}) {
     return _navigationKey.currentState
         .pushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> popAndNavigateTo(String routeName, {dynamic arguments}) {
+  Future<dynamic> popAndPushNamed(String routeName, {dynamic arguments}) {
     return _navigationKey.currentState
         .popAndPushNamed(routeName, arguments: arguments);
   }
 
-  Future<dynamic> replaceTo(String routeName, {dynamic arguments}) {
+  Future<dynamic> pushReplacementNamed(String routeName, {dynamic arguments}) {
     return _navigationKey.currentState
         .pushReplacementNamed(routeName, arguments: arguments);
   }

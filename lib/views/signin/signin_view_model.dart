@@ -20,7 +20,7 @@ class SignInViewModel extends BaseViewModel {
     setBusy(false);
     if (authResult is bool) {
       if (authResult) {
-        _navigationService.replaceTo(HomeViewRoute);
+        _navigationService.pushReplacementNamed(HomeViewRoute);
       } else {
         await _dialogService.showDialog(
           title: 'Sign In Failure',
@@ -52,6 +52,6 @@ class SignInViewModel extends BaseViewModel {
   }
 
   void navigateToSignUp() {
-    _navigationService.navigateTo(SignUpViewRoute);
+    _navigationService.pushNamed(SignUpViewRoute);
   }
 }

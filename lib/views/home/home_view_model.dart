@@ -33,27 +33,27 @@ class HomeViewModel extends BaseViewModel {
 
   Future<void> signOut() async {
     await _authenticationService.signOut();
-    await _navigationService.navigateTo(SignInViewRoute);
+    await _navigationService.pushReplacementNamed(SignInViewRoute);
   }
 
   Future navigateToAccountView() async {
-    await _navigationService.navigateTo(AccountViewRoute);
+    await _navigationService.popAndPushNamed(AccountViewRoute);
   }
 
   Future navigateToDealsView() async {
-    await _navigationService.navigateTo(DealsViewRoute);
+    await _navigationService.pushNamed(DealsViewRoute);
   }
 
   Future navigateToProductListView() async {
-    await _navigationService.navigateTo(ProductListViewRoute);
+    await _navigationService.popAndPushNamed(ProductListViewRoute);
   }
 
   Future navigateToProductDetailsView(int index) async {
-    await _navigationService.navigateTo(ProductDetailsViewRoute,
+    await _navigationService.pushNamed(ProductDetailsViewRoute,
         arguments: products[index]);
   }
 
   Future navigateToExperimentalProductFormView() async {
-    await _navigationService.navigateTo(ExperimentalProductFormViewRoute);
+    await _navigationService.popAndPushNamed(ExperimentalProductFormViewRoute);
   }
 }
